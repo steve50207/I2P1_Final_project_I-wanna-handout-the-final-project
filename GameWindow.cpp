@@ -8,7 +8,7 @@ const char *title = "I wanna handout the final project!";
 // ALLEGRO Variables
 ALLEGRO_DISPLAY* display = NULL;
 ALLEGRO_SAMPLE *song=NULL;
-ALLEGRO_SAMPLE_INSTANCE *sample_instance;
+ALLEGRO_SAMPLE_INSTANCE *menu_Sound;
 
 int Game_establish() {
     int msg = 0;
@@ -59,33 +59,37 @@ void game_init() {
 
 void game_begin() {
     // Load sound
-    song = al_load_sample("./sound/menu_music.wav");
+    song = al_load_sample("sound/menu_music.wav");
     al_reserve_samples(20);
-    sample_instance = al_create_sample_instance(song);
+    menu_Sound = al_create_sample_instance(song);
     // Loop the song until the display closes
-    al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
+    al_set_sample_instance_playmode(menu_Sound, ALLEGRO_PLAYMODE_LOOP);
     al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
+    al_attach_sample_instance_to_mixer(menu_Sound, al_get_default_mixer());
     // set the volume of instance
-    al_set_sample_instance_gain(sample_instance, 1) ;
-    al_play_sample_instance(sample_instance);
+    al_set_sample_instance_gain(menu_Sound, 1) ;
+    al_play_sample_instance(menu_Sound);
     al_start_timer(fps);
     // initialize the menu before entering the loop
     menu_init();
 
 }
 void game_update(){
-    if( judge_next_window ){
-        if( window == 1 ){
+    if( judge_next_window ==1 && window ==1 ){
             // not back menu anymore, therefore destroy it
             menu_destroy();
+            al_destroy_sample_instance(menu_Sound);
             // initialize next scene
-            game_scene_init();
+            select_charater_init();
             judge_next_window = false;
             window = 2;
-        }
+    }else if( judge_next_window ==1 && window == 2 ){
+            select_charater_destroy();
+            game_scene_init();
+            judge_next_window = false;
+            window = 3;
     }
-    if( window == 2 ){
+    if(window == 3){
         charater_update();
     }
 }
@@ -97,6 +101,8 @@ int process_event(){
     if( window == 1 ){
         menu_process(event);
     }else if( window == 2 ){
+        select_charater_process(event);
+    }else if( window == 3 ){
         charater_process(event);
     }
 
@@ -113,8 +119,11 @@ void game_draw(){
     if( window == 1 ){
         menu_draw();
     }else if( window == 2 ){
+        select_charater_draw();
+    }else if( window == 3 ){
         game_scene_draw();
     }
+
     al_flip_display();
 }
 int game_run() {

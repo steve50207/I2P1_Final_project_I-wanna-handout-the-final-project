@@ -1,4 +1,7 @@
 #include "GameWindow.h"
+
+
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -68,8 +71,11 @@ void destroy_video(){
     al_destroy_event_queue(queue);
 }
 
+*/
+
 int main(){
     srand(time(0));
+    /*
     init_video();
     video_begin();
     while( 1 ){
@@ -84,5 +90,6 @@ int main(){
         }
     }
     destroy_video();
+    */
     Game_establish();
 }

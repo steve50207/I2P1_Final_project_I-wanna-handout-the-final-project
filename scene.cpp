@@ -63,9 +63,9 @@ void select_charater_init()
     al_init_acodec_addon();
     select_charater = al_load_bitmap("./image/scene/select_character.png");
 
-    charater1 = al_load_bitmap("./image/character01/character01_down_still.png");
-    charater2 = al_load_bitmap("./image/character02/character02_down_still.png");
-    charater3 = al_load_bitmap("./image/character03/character03_down_still.png");
+    charater1 = al_load_bitmap("./image/character01/char01_move1.png");
+    charater2 = al_load_bitmap("./image/character02/char02_move1.png");
+    charater3 = al_load_bitmap("./image/character03/char03_move1.png");
     select_character_word1= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
     select_character_word2= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
     select_character_word3= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
@@ -79,12 +79,7 @@ void select_charater_process(ALLEGRO_EVENT event){
         if(event.keyboard.keycode == ALLEGRO_KEY_A||
            event.keyboard.keycode == ALLEGRO_KEY_B||
            event.keyboard.keycode == ALLEGRO_KEY_C)
-
             judge_next_window= true;
-    /*if( event.type == ALLEGRO_EVENT_KEY_UP )
-        if( event.keyboard.keycode == ALLEGRO_KEY_ENTER )
-            judge_next_window = true;*/
-
 }
 void select_charater_draw(){
 
@@ -111,8 +106,6 @@ void select_charater_destroy(){
     al_destroy_font(select_character_word2);
     al_destroy_font(select_character_word3);
     al_destroy_sample_instance(select_character_sound);
-
-
 }
 
 // function of game_scene

@@ -24,7 +24,7 @@ void menu_destroy(){
 // function of game_scene
 void game_scene_init(){
     character_init();
-    background = al_load_bitmap("./image/stage.jpg");
+    background = al_load_bitmap("image/scene/gaming_2.png");
 }
 void game_scene_draw(){
     al_draw_bitmap(background, 0, 0, 0);

@@ -3,7 +3,7 @@
 bool draw = false;
 int window = 1;
 
-const char *title = "Final Project 10xxxxxxx";
+const char *title = "I wanna handout the final project!";
 
 // ALLEGRO Variables
 ALLEGRO_DISPLAY* display = NULL;
@@ -37,7 +37,6 @@ void game_init() {
     // create event queue
     event_queue = al_create_event_queue();
     // Initialize Allegro settings
-    al_set_window_position(display, 0, 0);
     al_set_window_title(display, title);
     al_init_primitives_addon();
     al_init_font_addon(); // initialize the font addon
@@ -54,7 +53,7 @@ void game_init() {
     fps  = al_create_timer( 1.0 / FPS );
     al_register_event_source(event_queue, al_get_timer_event_source( fps )) ;
     // initialize the icon on the display
-    ALLEGRO_BITMAP *icon = al_load_bitmap("./image/icon.jpg");
+    ALLEGRO_BITMAP *icon = al_load_bitmap("image/character01/characterr1.png");
     al_set_display_icon(display, icon);
 }
 

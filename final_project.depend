@@ -337,7 +337,7 @@
 1652962914 source:f:\i2p1_final_project-master\scene.cpp
 	"scene.h"
 
-1655571667 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.cpp
+1655573763 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.cpp
 	"charater.h"
 
 1655466439 f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.h
@@ -655,7 +655,7 @@
 	"allegro5/allegro.h"
 	"allegro5/allegro_font.h"
 
-1655552385 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\gamewindow.cpp
+1655580386 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\gamewindow.cpp
 	"GameWindow.h"
 
 1655466439 f:\i2p1_final_project_i-wanna-handout-the-final-project\gamewindow.h
@@ -663,20 +663,20 @@
 	"charater.h"
 	"scene.h"
 
-1655541982 f:\i2p1_final_project_i-wanna-handout-the-final-project\scene.h
+1655573496 f:\i2p1_final_project_i-wanna-handout-the-final-project\scene.h
 	"global.h"
 	"charater.h"
 
 1655570716 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\global.cpp
 	"global.h"
 
-1655546022 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\main.cpp
+1655580448 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\main.cpp
 	"GameWindow.h"
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 
-1655571985 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\scene.cpp
+1655580416 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\scene.cpp
 	"scene.h"
 
 1652964900 f:\i2p1_final_project_i-wanna-handout-the-final-project\allegro\include\allegro5\allegro_video.h

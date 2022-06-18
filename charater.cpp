@@ -42,7 +42,7 @@ void character_init(){
     //initial counting component
     ts = al_get_time();                         //add
     sprintf(score_string,"score = %2d", 0);     //add
-    sprintf(score_string,"time = %2d", 60);     //add
+    sprintf(time_string,"time = %2d", 60);      //add
 
 }
 void charater_process(ALLEGRO_EVENT event){

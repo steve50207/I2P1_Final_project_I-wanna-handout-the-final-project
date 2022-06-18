@@ -27,8 +27,6 @@ ALLEGRO_BITMAP *win = NULL;
 ALLEGRO_BITMAP *lose= NULL;
 
 
-
-
 // function of menu
 void menu_init(){
     al_init_image_addon();
@@ -38,7 +36,6 @@ void menu_init(){
     menu_word1 = al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 30, 0);
     menu_word2 = al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 30, 0);
     menu_word3 = al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 30, 0);
-
 }
 void menu_process(ALLEGRO_EVENT event){
     if( event.type == ALLEGRO_EVENT_KEY_UP )
@@ -125,7 +122,7 @@ void game_scene_draw(){
     al_draw_bitmap(background, 0, 0, 0);
     character_draw();
     al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
-    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 925, 10, 0, time_string);          //add
+    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 950, 10, 0, time_string);          //add
     al_set_sample_instance_playmode(game_scene_sound, ALLEGRO_PLAYMODE_LOOP);           //add
     al_attach_sample_instance_to_mixer(game_scene_sound, al_get_default_mixer());       //add
     al_set_sample_instance_gain(game_scene_sound, 3);                                   //add

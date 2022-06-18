@@ -1,6 +1,10 @@
 #include "global.h"
 #include "charater.h"
 
+void opening_init();
+void opening_draw();
+void opening_destroy();
+
 void menu_init();
 void menu_process(ALLEGRO_EVENT event);
 void menu_draw();

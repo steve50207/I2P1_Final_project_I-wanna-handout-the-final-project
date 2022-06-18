@@ -337,7 +337,7 @@
 1652962914 source:f:\i2p1_final_project-master\scene.cpp
 	"scene.h"
 
-1655537851 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.cpp
+1655540718 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.cpp
 	"charater.h"
 
 1655466439 f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.h
@@ -655,7 +655,7 @@
 	"allegro5/allegro.h"
 	"allegro5/allegro_font.h"
 
-1655537596 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\gamewindow.cpp
+1655539115 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\gamewindow.cpp
 	"GameWindow.h"
 
 1655466439 f:\i2p1_final_project_i-wanna-handout-the-final-project\gamewindow.h

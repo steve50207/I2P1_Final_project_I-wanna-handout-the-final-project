@@ -89,7 +89,7 @@ void game_update(){
             judge_next_window = false;
             window = 3;
     }
-    if(window == 3){
+    else if(judge_next_window ==0 && window == 3){
         charater_update();
     }
 }

@@ -19,4 +19,9 @@ extern bool key_state[ALLEGRO_KEY_MAX];
 extern bool judge_next_window;
 extern ALLEGRO_EVENT_QUEUE *event_queue;
 extern ALLEGRO_TIMER *fps;
+extern int score;               //add
+extern char score_string[50];   //add
+extern double ts;               //add
+extern double elapsed_time;     //add
+extern char time_string[50];    //add
 #endif

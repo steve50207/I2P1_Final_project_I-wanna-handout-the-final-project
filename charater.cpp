@@ -13,6 +13,8 @@ typedef struct character
     int anime_time; // indicate how long the animation
 }Character;
 Character chara;
+
+
 ALLEGRO_SAMPLE *sample = NULL;
 void character_init(){
     // load character images
@@ -36,6 +38,11 @@ void character_init(){
     chara.state = STOP;
     chara.anime = 0;
     chara.anime_time = 30;
+
+    //initial counting component
+    ts = al_get_time();                         //add
+    sprintf(score_string,"score = %2d", 0);     //add
+    sprintf(score_string,"time = %2d", 60);     //add
 
 }
 void charater_process(ALLEGRO_EVENT event){
@@ -97,6 +104,10 @@ void charater_update(){
     }else if ( chara.anime == 0 ){
         chara.state = STOP;
     }
+    elapsed_time = 60 - (al_get_time() - ts);               //add
+    sprintf(score_string,"score = %2d", score);             //add
+    sprintf(time_string,"time = %2d", (int)elapsed_time);   //add
+
 }
 void character_draw(){
     // with the state, draw corresponding image

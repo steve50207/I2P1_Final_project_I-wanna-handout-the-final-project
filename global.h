@@ -23,5 +23,6 @@ extern int score;               //add
 extern char score_string[50];   //add
 extern double ts;               //add
 extern double elapsed_time;     //add
+extern int game_time;           //add
 extern char time_string[50];    //add
 #endif

@@ -92,6 +92,7 @@ void game_update(){
     }
     else if(judge_next_window ==0 && window == 3){
         charater_update();
+        doc_update();
     }
 }
 int process_event(){
@@ -105,6 +106,7 @@ int process_event(){
         select_charater_process(event);
     }else if( window == 3 ){
         charater_process(event);
+        doc_process();
     }
 
     // Shutdown our program

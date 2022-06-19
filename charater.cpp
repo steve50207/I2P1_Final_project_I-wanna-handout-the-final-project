@@ -1,7 +1,7 @@
 #include "charater.h"
 
 // the state of character
-enum {STOP = 0, MOVE};
+enum {STOP = 0, MOVE, getdoc, notgetdoc};
 typedef struct character
 {
     int x, y; // the position of image
@@ -42,7 +42,7 @@ void character_init(){
     //initial counting component
     ts = al_get_time();                         //add
     sprintf(score_string,"score = %2d", 0);     //add
-    sprintf(time_string,"time = %2d", 60);      //add
+    sprintf(time_string,"time = %2d", 61);      //add
 
 }
 void charater_process(ALLEGRO_EVENT event){
@@ -68,8 +68,6 @@ void charater_update(){
         chara.dir[2] = 1;
         chara.dir[3] = 0;
         chara.y -= 5;
-        //character_xposition=chara.x;
-        //character_yposition=chara.y;
         chara.state = MOVE;
     }else if( key_state[ALLEGRO_KEY_A] ){
         chara.dir[0] = 0;
@@ -77,8 +75,6 @@ void charater_update(){
         chara.dir[2] = 0;
         chara.dir[3] = 0;
         chara.x -= 5;
-        //character_xposition=chara.x;
-        //character_yposition=chara.y;
         chara.state = MOVE;
     }else if( key_state[ALLEGRO_KEY_S] ){
         chara.dir[0] = 1;
@@ -86,8 +82,6 @@ void charater_update(){
         chara.dir[2] = 0;
         chara.dir[3] = 0;
         chara.y += 5;
-        //character_xposition=chara.x;
-        //character_yposition=chara.y;
         chara.state = MOVE;
     }else if( key_state[ALLEGRO_KEY_D] ){
         chara.dir[0] = 0;
@@ -95,8 +89,6 @@ void charater_update(){
         chara.dir[2] = 0;
         chara.dir[3] = 1;
         chara.x += 5;
-        //character_xposition=chara.x;
-        //character_yposition=chara.y;
         chara.state = MOVE;
     }else if( chara.anime == chara.anime_time-1 ){
         chara.anime = 0;
@@ -104,9 +96,10 @@ void charater_update(){
     }else if ( chara.anime == 0 ){
         chara.state = STOP;
     }
-    elapsed_time = 60 - (al_get_time() - ts);               //add
+    elapsed_time = 61 - (al_get_time() - ts);               //add
+    game_time = (int)elapsed_time;                          //add
     sprintf(score_string,"score = %2d", score);             //add
-    sprintf(time_string,"time = %2d", (int)elapsed_time);   //add
+    sprintf(time_string,"time = %2d", game_time);           //add
 
 }
 void character_draw(){
@@ -158,4 +151,60 @@ void character_destory(){
     al_destroy_bitmap(chara.img_move[5]);
     al_destroy_bitmap(chara.img_move[6]);
     al_destroy_bitmap(chara.img_move[7]);
+}
+
+typedef struct doc
+{
+    int x, y; // the position of image
+    int width, height; // the width and height of image
+    int state; // the state of icon get/not get;
+    ALLEGRO_BITMAP *img_doc;
+
+}Doc;
+Doc doc;
+
+ALLEGRO_SAMPLE *get_doc_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_doc_sound;
+
+void doc_init(){
+    doc.img_doc=al_load_bitmap("./image/score/document_blue.png");
+    // initial the geometric information of character
+    doc.width = al_get_bitmap_width(doc.img_doc);
+    doc.height = al_get_bitmap_height(doc.img_doc);
+    doc.x = (int)rand()%1000;
+    doc.y = (int)rand()%800;
+    // load effective sound
+    get_doc_sample = al_load_sample("./sound/picking_file.wav");
+    get_doc_sound  = al_create_sample_instance(get_doc_sample);
+    // initial the animation component
+    doc.state = notgetdoc;
+}
+
+
+void doc_process(){
+
+    if(doc.x-67 <= chara.x && chara.x <= doc.x+48 && doc.y-100 <= chara.y && chara.y <= doc.y+48){
+
+            al_set_sample_instance_playmode(get_doc_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_doc_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_doc_sound, 5);
+            al_play_sample_instance(get_doc_sound);
+            score+=5;
+            printf("%d\n",score);
+            doc.state=getdoc;
+    }
+}
+
+void doc_update(){
+    if( doc.state == getdoc){
+        doc_init();
+        doc.state=notgetdoc;
+    }
+}
+void doc_draw(){
+        al_draw_bitmap(doc.img_doc, doc.x, doc.y, 0);
+}
+void doc_destory(){
+    al_destroy_bitmap(doc.img_doc);
+    al_destroy_sample_instance(get_doc_sound);
 }

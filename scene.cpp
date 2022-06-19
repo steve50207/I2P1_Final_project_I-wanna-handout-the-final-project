@@ -20,6 +20,9 @@ ALLEGRO_FONT *charater_time= NULL;          //add
 ALLEGRO_SAMPLE *game_scene_sample= NULL;    //add
 ALLEGRO_SAMPLE_INSTANCE *game_scene_sound;  //add
 
+ALLEGRO_BITMAP *img_doc;
+
+
 ALLEGRO_BITMAP *background= NULL;
 
 ALLEGRO_BITMAP *win = NULL;
@@ -112,25 +115,30 @@ void select_charater_destroy(){
 // function of game_scene
 void game_scene_init(){
     character_init();
+    doc_init();
     background = al_load_bitmap("./image/scene/gaming_1.png");
     charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);            //add
     charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);             //add
+
     game_scene_sample = al_load_sample("./sound/game_bgm.wav");
     game_scene_sound = al_create_sample_instance(game_scene_sample);
 }
 void game_scene_draw(){
     al_draw_bitmap(background, 0, 0, 0);
+    doc_draw();
     character_draw();
     al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
-    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 950, 10, 0, time_string);          //add
+    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 935, 10, 0, time_string);          //add
     al_set_sample_instance_playmode(game_scene_sound, ALLEGRO_PLAYMODE_LOOP);           //add
     al_attach_sample_instance_to_mixer(game_scene_sound, al_get_default_mixer());       //add
     al_set_sample_instance_gain(game_scene_sound, 3);                                   //add
     al_play_sample_instance(game_scene_sound);                                          //add
+
 }
 void game_scene_destroy(){
     al_destroy_bitmap(background);
     character_destory();
+    doc_destory();
     al_destroy_font(charater_score);                                                    //add
     al_destroy_font(charater_time);                                                     //add
     al_destroy_sample_instance(game_scene_sound);                                       //add

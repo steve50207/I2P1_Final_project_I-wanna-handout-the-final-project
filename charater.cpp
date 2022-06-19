@@ -187,7 +187,7 @@ void doc_process(){
 
             al_set_sample_instance_playmode(get_doc_sound, ALLEGRO_PLAYMODE_ONCE);
             al_attach_sample_instance_to_mixer(get_doc_sound, al_get_default_mixer());
-            al_set_sample_instance_gain(get_doc_sound, 5);
+            al_set_sample_instance_gain(get_doc_sound, 10);
             al_play_sample_instance(get_doc_sound);
             score+=5;
             printf("%d\n",score);

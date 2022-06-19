@@ -1,7 +1,7 @@
 #include "charater.h"
 
 // the state of character
-enum {STOP = 0, MOVE, getdoc, notgetdoc};
+enum {STOP = 0, MOVE, getdoc, notgetdoc, getcof, notgetcof, getbeer, notgetbeer, getpills, notgetpills};
 typedef struct character
 {
     int x, y; // the position of image
@@ -165,7 +165,7 @@ Doc doc;
 
 ALLEGRO_SAMPLE *get_doc_sample= NULL;
 ALLEGRO_SAMPLE_INSTANCE *get_doc_sound;
-
+int doc_count;
 void doc_init(){
     doc.img_doc=al_load_bitmap("./image/score/document_blue.png");
     // initial the geometric information of character
@@ -187,24 +187,213 @@ void doc_process(){
 
             al_set_sample_instance_playmode(get_doc_sound, ALLEGRO_PLAYMODE_ONCE);
             al_attach_sample_instance_to_mixer(get_doc_sound, al_get_default_mixer());
-            al_set_sample_instance_gain(get_doc_sound, 10);
+            al_set_sample_instance_gain(get_doc_sound, 20);
             al_play_sample_instance(get_doc_sound);
             score+=5;
             printf("%d\n",score);
             doc.state=getdoc;
     }
 }
-
+int closed;
 void doc_update(){
-    if( doc.state == getdoc){
+    doc_count++;
+    if( doc.state == getdoc ){
+        closed=1;
         doc_init();
-        doc.state=notgetdoc;
+    }
+    if(doc_count%300==0){
+        closed=0;
+        doc_init();
+        printf("%d\n",doc_count);
     }
 }
 void doc_draw(){
-        al_draw_bitmap(doc.img_doc, doc.x, doc.y, 0);
+        if(closed==1){}
+        if(closed==0||score==0){
+            al_draw_bitmap(doc.img_doc, doc.x, doc.y, 0);
+        }
 }
 void doc_destory(){
     al_destroy_bitmap(doc.img_doc);
     al_destroy_sample_instance(get_doc_sound);
+}
+
+///////////////////////////////////////////////////////////////////coffee
+int cof_count;
+typedef struct coffee
+{
+    int x, y; // the position of image
+    int width, height; // the width and height of image
+    int state; // the state of icon get/not get;
+    ALLEGRO_BITMAP *img_cof;
+
+}Coffee;
+Coffee cof;
+
+ALLEGRO_SAMPLE *get_cof_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_cof_sound;
+
+void cof_init(){
+    cof.img_cof=al_load_bitmap("./image/booster/coffee1.png");
+    // initial the geometric information of character
+    cof.width = al_get_bitmap_width(cof.img_cof);
+    cof.height = al_get_bitmap_height(cof.img_cof);
+    cof.x = (int)rand()%1000;
+    cof.y = (int)rand()%800;
+    // load effective sound
+    get_cof_sample = al_load_sample("./sound/drinking_coffee.wav");
+    get_cof_sound  = al_create_sample_instance(get_cof_sample);
+    // initial the animation component
+    cof.state = notgetcof;
+}
+
+
+void cof_process(){
+
+    if(cof.x-67 <= chara.x && chara.x <= cof.x+48 && cof.y-100 <= chara.y && chara.y <= cof.y+48){
+
+            al_set_sample_instance_playmode(get_cof_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_cof_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_cof_sound, 20);
+            al_play_sample_instance(get_cof_sound);
+            printf("get cof boost\n");
+            cof.state=getcof;
+    }
+}
+
+void cof_update(){
+    cof_count++;
+    if( cof.state == getcof){
+        cof_init();
+    }
+    if(cof_count%600==0){
+        cof_init();
+    }
+}
+void cof_draw(){
+        al_draw_bitmap(cof.img_cof, cof.x, cof.y, 0);
+}
+void cof_destory(){
+    al_destroy_bitmap(cof.img_cof);
+    al_destroy_sample_instance(get_cof_sound);
+}
+
+//////////////////////////////////////////////////////////////////beer
+typedef struct beer
+{
+    int x, y; // the position of image
+    int width, height; // the width and height of image
+    int state; // the state of icon get/not get;
+    ALLEGRO_BITMAP *img_beer;
+
+}Beer;
+Beer beer;
+
+ALLEGRO_SAMPLE *get_beer_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_beer_sound;
+int beer_count;
+void beer_init(){
+    beer.img_beer=al_load_bitmap("./image/debuff/beer3.png");
+    // initial the geometric information of character
+    beer.width = al_get_bitmap_width(beer.img_beer);
+    beer.height = al_get_bitmap_height(beer.img_beer);
+    beer.x = (int)rand()%1000;
+    beer.y = (int)rand()%800;
+    // load effective sound
+    get_beer_sample = al_load_sample("./sound/drinking_alchol.wav");
+    get_beer_sound  = al_create_sample_instance(get_beer_sample);
+    // initial the animation component
+    beer.state = notgetbeer;
+}
+
+
+void beer_process(){
+
+    if(beer.x-67<= chara.x && chara.x <= beer.x+48 && beer.y-100 <= chara.y && chara.y <= beer.y+48){
+
+            al_set_sample_instance_playmode(get_beer_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_beer_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_beer_sound, 10);
+            al_play_sample_instance(get_beer_sound);
+            printf("get beer debuff\n");
+            beer.state=getbeer;
+            game_time-=10;
+    }
+}
+
+void beer_update(){
+    beer_count++;
+    if( beer.state == getbeer){
+        beer_init();
+    }
+    if(beer_count%450==0){
+        beer_init();
+    }
+}
+void beer_draw(){
+        al_draw_bitmap(beer.img_beer, beer.x, beer.y, 0);
+}
+void beer_destory(){
+    al_destroy_bitmap(beer.img_beer);
+    al_destroy_sample_instance(get_beer_sound);
+}
+
+//////////////////////////////////////////////////////////////////pill
+typedef struct pill
+{
+    int x, y; // the position of image
+    int width, height; // the width and height of image
+    int state; // the state of icon get/not get;
+    ALLEGRO_BITMAP *img_pills;
+
+}Pill;
+Pill pills;
+
+ALLEGRO_SAMPLE *get_pills_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_pills_sound;
+int pills_count;
+void pills_init(){
+    pills.img_pills=al_load_bitmap("./image/debuff/pills2.png");
+    // initial the geometric information of character
+    pills.width = al_get_bitmap_width(pills.img_pills);
+    pills.height = al_get_bitmap_height(pills.img_pills);
+    pills.x = (int)rand()%1000;
+    pills.y = (int)rand()%800;
+    // load effective sound
+    get_pills_sample = al_load_sample("./sound/taking_pills.wav");
+    get_pills_sound  = al_create_sample_instance(get_pills_sample);
+    // initial the animation component
+    pills.state = notgetpills;
+}
+
+
+void pills_process(){
+
+    if(pills.x-67<= chara.x && chara.x <= pills.x+48 && pills.y-100 <= chara.y && chara.y <= pills.y+48){
+
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 10);
+            al_play_sample_instance(get_pills_sound);
+            printf("get pills debuff\n");
+            pills.state=getpills;
+
+    }
+}
+
+void pills_update(){
+    pills_count++;
+    if( pills.state == getpills){
+        pills_init();
+    }
+    if(pills_count%150==0){
+        pills_init();
+    }
+}
+void pills_draw(){
+        al_draw_bitmap(pills.img_pills, pills.x, pills.y, 0);
+}
+void pills_destory(){
+    al_destroy_bitmap(pills.img_pills);
+    al_destroy_sample_instance(get_pills_sound);
 }

@@ -21,6 +21,9 @@ ALLEGRO_SAMPLE *game_scene_sample= NULL;    //add
 ALLEGRO_SAMPLE_INSTANCE *game_scene_sound;  //add
 
 ALLEGRO_BITMAP *img_doc;
+ALLEGRO_BITMAP *img_cof;
+ALLEGRO_BITMAP *img_beer;
+ALLEGRO_BITMAP *img_pills;
 
 
 ALLEGRO_BITMAP *background= NULL;
@@ -92,6 +95,7 @@ void select_charater_process(ALLEGRO_EVENT event){
            event.keyboard.keycode == ALLEGRO_KEY_C)
             judge_next_window= true;
 }
+
 void select_charater_draw(){
 
     al_draw_bitmap(select_charater, 0, 0, 0);
@@ -124,6 +128,9 @@ void select_charater_destroy(){
 void game_scene_init(){
     character_init();
     doc_init();
+    cof_init();
+    beer_init();
+    pills_init();
     background = al_load_bitmap("./image/scene/gaming_1.png");
     charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);            //add
     charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);             //add
@@ -131,9 +138,13 @@ void game_scene_init(){
     game_scene_sample = al_load_sample("./sound/game_bgm.wav");
     game_scene_sound = al_create_sample_instance(game_scene_sample);
 }
+
 void game_scene_draw(){
     al_draw_bitmap(background, 0, 0, 0);
     doc_draw();
+    cof_draw();
+    beer_draw();
+    pills_draw();
     character_draw();
     al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
     al_draw_text(charater_time, al_map_rgb(0, 0, 0), 935, 10, 0, time_string);          //add
@@ -143,10 +154,14 @@ void game_scene_draw(){
     al_play_sample_instance(game_scene_sound);                                          //add
 
 }
+
 void game_scene_destroy(){
     al_destroy_bitmap(background);
     character_destory();
     doc_destory();
+    cof_destory();
+    beer_destory();
+    pills_destory();
     al_destroy_font(charater_score);                                                    //add
     al_destroy_font(charater_time);                                                     //add
     al_destroy_sample_instance(game_scene_sound);                                       //add
@@ -163,12 +178,14 @@ void win_scene_init(){
     win_sample = al_load_sample("./sound/game_succeed.wav");
     win_sound = al_create_sample_instance(win_sample);
 }
+
 void win_scene_process(ALLEGRO_EVENT event){
     if( event.type == ALLEGRO_EVENT_KEY_UP )
         if( event.keyboard.keycode == ALLEGRO_KEY_ENTER )
             judge_next_window = true;
 
 }
+
 void win_scene_draw(){
     al_draw_bitmap(win, 0, 0, 0);
     al_draw_text(win_word, al_map_rgb(255, 255, 255), 250, 450, 0, "YOU ARE PASSED");
@@ -177,6 +194,7 @@ void win_scene_draw(){
     al_set_sample_instance_gain(win_sound, 3);
     al_play_sample_instance(win_sound);
 }
+
 void win_scene_destroy(){
     al_destroy_bitmap(win);
     al_destroy_font(win_word);
@@ -194,11 +212,13 @@ void lose_scene_init(){
     lose_sample = al_load_sample("./sound/game_fail.wav");
     lose_sound = al_create_sample_instance(lose_sample);
 }
+
 void lose_scene_process(ALLEGRO_EVENT event){
     if( event.type == ALLEGRO_EVENT_KEY_UP )
         if( event.keyboard.keycode == ALLEGRO_KEY_ENTER )
             judge_next_window = true;
 }
+
 void lose_scene_draw(){
     al_draw_bitmap(lose, 0, 0, 0);
     al_draw_text(lose_word, al_map_rgb(255, 255, 255), 250, 450, 0, "YOU ARE FAILED");
@@ -207,6 +227,7 @@ void lose_scene_draw(){
     al_set_sample_instance_gain(lose_sound, 3);
     al_play_sample_instance(lose_sound);
 }
+
 void lose_scene_destroy(){
     al_destroy_bitmap(lose);
     al_destroy_font(lose_word);

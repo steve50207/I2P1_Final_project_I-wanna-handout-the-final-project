@@ -59,6 +59,7 @@ void init_video(){
     al_register_event_source(queue, al_get_display_event_source(screen));
     al_register_event_source(queue, al_get_timer_event_source(timer));
 
+
 }
 void video_begin(){
     al_reserve_samples(1);

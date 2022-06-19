@@ -99,6 +99,7 @@ void select_charater_draw(){
     al_attach_sample_instance_to_mixer(select_character_sound, al_get_default_mixer());
     al_set_sample_instance_gain(select_character_sound, 3);
     al_play_sample_instance(select_character_sound);
+
 }
 
 void select_charater_destroy(){
@@ -143,3 +144,13 @@ void game_scene_destroy(){
     al_destroy_font(charater_time);                                                     //add
     al_destroy_sample_instance(game_scene_sound);                                       //add
 }
+
+void win_scene_init();
+void win_scene_process(ALLEGRO_EVENT event);
+void win_scene_draw();
+void win_scene_destroy();
+
+void lose_scene_init();
+void lose_scene_process(ALLEGRO_EVENT event);
+void lose_scene_draw();
+void lose_scene_destroy();

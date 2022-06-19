@@ -1,4 +1,4 @@
-#include <algif.h>
+#include "algif.h"
 #include <allegro5/allegro_primitives.h>
 #include <math.h>
 

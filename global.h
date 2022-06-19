@@ -10,7 +10,7 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-
+#include "algif5/src/algif.h"
 // note that you can't assign initial value here!
 extern const float FPS;
 extern const int WIDTH;

@@ -16,9 +16,11 @@ void game_scene_draw();
 void game_scene_destroy();
 
 void win_scene_init();
+void win_scene_process(ALLEGRO_EVENT event);
 void win_scene_draw();
 void win_scene_destroy();
 
 void lose_scene_init();
+void lose_scene_process(ALLEGRO_EVENT event);
 void lose_scene_draw();
 void lose_scene_destroy();

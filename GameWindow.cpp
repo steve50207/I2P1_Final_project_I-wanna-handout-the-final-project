@@ -1,7 +1,6 @@
 #include "GameWindow.h"
 
 bool draw = false;
-int window = 1;
 
 const char *title = "I wanna handout the final project!";
 
@@ -90,12 +89,26 @@ void game_update(){
             judge_next_window = false;
             window = 3;
     }
-    else if(judge_next_window ==0 && window == 3){
+    else if(window == 3){
         charater_update();
         doc_update();
         cof_update();
         beer_update();
         pills_update();
+    }
+
+    if(judge_next_window ==1 && window == 4){
+
+        game_scene_destroy();
+        win_scene_init();
+        judge_next_window =false;
+
+    }else if(judge_next_window ==1 && window == 5){
+
+        game_scene_destroy();
+        lose_scene_init();
+        judge_next_window =false;
+
     }
 }
 int process_event(){
@@ -113,6 +126,13 @@ int process_event(){
         cof_process();
         beer_process();
         pills_process();
+    }else if(window == 4){
+        win_scene_process(event);
+        if(judge_next_window == 1)return -1;
+        //printf("process window4\n");
+    }else if(window == 5){
+        lose_scene_process(event);
+        if(judge_next_window == 1)return -1;
     }
 
     // Shutdown our program
@@ -131,6 +151,10 @@ void game_draw(){
         select_charater_draw();
     }else if( window == 3 ){
         game_scene_draw();
+    }else if(window == 4){
+        win_scene_draw();
+    }else if(window == 5){
+        lose_scene_draw();
     }
 
     al_flip_display();
@@ -151,5 +175,6 @@ void game_destroy() {
     // Make sure you destroy all things
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
-    game_scene_destroy();
+    win_scene_destroy();
+    lose_scene_destroy();
 }

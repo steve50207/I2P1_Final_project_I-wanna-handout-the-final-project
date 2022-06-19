@@ -136,6 +136,14 @@ void charater_update(){
     game_time = (int)elapsed_time;                          //add
     sprintf(score_string,"score = %2d", score);             //add
     sprintf(time_string,"time = %2d", game_time);           //add
+    if(game_time== -1 && score < 60) {
+        judge_next_window =1;
+        window =5;
+    }
+    if(game_time == -1 && score > 60){
+        judge_next_window=1;
+        window =4;
+    }
 
 }
 void character_draw(){

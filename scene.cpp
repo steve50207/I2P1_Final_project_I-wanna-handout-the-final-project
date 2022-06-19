@@ -174,7 +174,7 @@ void win_scene_init(){
     al_init_acodec_addon();
     win = al_load_bitmap("./image/scene/wining.png");
 
-    win_word= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
+    win_word= al_load_ttf_font("./font/pirulen.ttf", 50, 0);
     win_sample = al_load_sample("./sound/game_succeed.wav");
     win_sound = al_create_sample_instance(win_sample);
 }
@@ -208,7 +208,7 @@ void lose_scene_init(){
     al_init_acodec_addon();
     lose = al_load_bitmap("./image/scene/losing.png");
 
-    lose_word= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
+    lose_word= al_load_ttf_font("./font/pirulen.ttf", 50, 0);
     lose_sample = al_load_sample("./sound/game_fail.wav");
     lose_sound = al_create_sample_instance(lose_sample);
 }
@@ -221,7 +221,7 @@ void lose_scene_process(ALLEGRO_EVENT event){
 
 void lose_scene_draw(){
     al_draw_bitmap(lose, 0, 0, 0);
-    al_draw_text(lose_word, al_map_rgb(255, 255, 255), 250, 450, 0, "YOU ARE FAILED");
+    al_draw_text(lose_word, al_map_rgb(255, 255, 255), 527, 219, 0, "YOU ARE FAILED");
     al_set_sample_instance_playmode(lose_sound, ALLEGRO_PLAYMODE_ONCE);
     al_attach_sample_instance_to_mixer(lose_sound, al_get_default_mixer());
     al_set_sample_instance_gain(lose_sound, 3);

@@ -63,33 +63,69 @@ void charater_process(ALLEGRO_EVENT event){
 void charater_update(){
     // use the idea of finite state machine to deal with different state
     if( key_state[ALLEGRO_KEY_W] ){
-        chara.dir[0] = 0;
-        chara.dir[1] = 0;
-        chara.dir[2] = 1;
-        chara.dir[3] = 0;
-        chara.y -= 5;
-        chara.state = MOVE;
+        if(change_direction==0){
+            chara.dir[0] = 0;
+            chara.dir[1] = 0;
+            chara.dir[2] = 1;
+            chara.dir[3] = 0;
+            chara.y -= (5+speed);
+            chara.state = MOVE;
+        }else if(change_direction==1){
+            chara.dir[0] = 1;
+            chara.dir[1] = 0;
+            chara.dir[2] = 0;
+            chara.dir[3] = 0;
+            chara.y += (5+speed);
+            chara.state = MOVE;
+        }
     }else if( key_state[ALLEGRO_KEY_A] ){
-        chara.dir[0] = 0;
-        chara.dir[1] = 1;
-        chara.dir[2] = 0;
-        chara.dir[3] = 0;
-        chara.x -= 5;
-        chara.state = MOVE;
+        if(change_direction==0){
+            chara.dir[0] = 0;
+            chara.dir[1] = 1;
+            chara.dir[2] = 0;
+            chara.dir[3] = 0;
+            chara.x -= (5+speed);
+            chara.state = MOVE;
+        }else if(change_direction==1){
+            chara.dir[0] = 0;
+            chara.dir[1] = 0;
+            chara.dir[2] = 0;
+            chara.dir[3] = 1;
+            chara.x += (5+speed);
+            chara.state = MOVE;
+        }
     }else if( key_state[ALLEGRO_KEY_S] ){
-        chara.dir[0] = 1;
-        chara.dir[1] = 0;
-        chara.dir[2] = 0;
-        chara.dir[3] = 0;
-        chara.y += 5;
-        chara.state = MOVE;
+        if(change_direction==0){
+            chara.dir[0] = 1;
+            chara.dir[1] = 0;
+            chara.dir[2] = 0;
+            chara.dir[3] = 0;
+            chara.y += (5+speed);
+            chara.state = MOVE;
+        }else if(change_direction==1){
+            chara.dir[0] = 0;
+            chara.dir[1] = 0;
+            chara.dir[2] = 1;
+            chara.dir[3] = 0;
+            chara.y -= (5+speed);
+            chara.state = MOVE;
+        }
     }else if( key_state[ALLEGRO_KEY_D] ){
-        chara.dir[0] = 0;
-        chara.dir[1] = 0;
-        chara.dir[2] = 0;
-        chara.dir[3] = 1;
-        chara.x += 5;
-        chara.state = MOVE;
+        if(change_direction==0){
+            chara.dir[0] = 0;
+            chara.dir[1] = 0;
+            chara.dir[2] = 0;
+            chara.dir[3] = 1;
+            chara.x += (5+speed);
+            chara.state = MOVE;
+        }else if(change_direction==1){
+            chara.dir[0] = 0;
+            chara.dir[1] = 1;
+            chara.dir[2] = 0;
+            chara.dir[3] = 0;
+            chara.x -= (5+speed);
+            chara.state = MOVE;
+        }
     }else if( chara.anime == chara.anime_time-1 ){
         chara.anime = 0;
         chara.state = STOP;
@@ -258,6 +294,8 @@ void cof_process(){
             al_play_sample_instance(get_cof_sound);
             printf("get cof boost\n");
             cof.state=getcof;
+            speed++;
+            printf("speed = %d\n", speed);
     }
 }
 
@@ -317,7 +355,8 @@ void beer_process(){
             al_play_sample_instance(get_beer_sound);
             printf("get beer debuff\n");
             beer.state=getbeer;
-            game_time-=10;
+            speed--;
+            printf("speed = %d\n", speed);
     }
 }
 
@@ -377,6 +416,11 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
             printf("get pills debuff\n");
             pills.state=getpills;
+            if(change_direction==false){
+                change_direction =true;
+            }else{
+                change_direction =false;
+            }
 
     }
 }

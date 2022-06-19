@@ -337,13 +337,13 @@
 1652962914 source:f:\i2p1_final_project-master\scene.cpp
 	"scene.h"
 
-1655630736 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.cpp
+1655641482 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.cpp
 	"charater.h"
 
 1655631219 f:\i2p1_final_project_i-wanna-handout-the-final-project\charater.h
 	"global.h"
 
-1655629008 f:\i2p1_final_project_i-wanna-handout-the-final-project\global.h
+1655640481 f:\i2p1_final_project_i-wanna-handout-the-final-project\global.h
 	<stdio.h>
 	<allegro5/allegro.h>
 	<allegro5/allegro_primitives.h>
@@ -668,7 +668,7 @@
 	"global.h"
 	"charater.h"
 
-1655628451 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\global.cpp
+1655640525 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\global.cpp
 	"global.h"
 
 1655629008 source:f:\i2p1_final_project_i-wanna-handout-the-final-project\main.cpp

@@ -14,3 +14,5 @@ double ts = 0;                       //add
 double elapsed_time = 0;             //add
 int game_time = 0;                   //add
 char time_string[50]={'\0'};         //add
+int speed = 0;                       //add
+bool change_direction = false;       //add

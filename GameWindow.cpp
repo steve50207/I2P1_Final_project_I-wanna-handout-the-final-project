@@ -91,7 +91,9 @@ void game_update(){
     }
     else if(window == 3){
         charater_update();
-        doc_update();
+        doc1_update();
+        doc2_update();
+        doc3_update();
         cof_update();
         beer_update();
         pills_update();
@@ -122,7 +124,9 @@ int process_event(){
         select_charater_process(event);
     }else if( window == 3 ){
         charater_process(event);
-        doc_process();
+        doc1_process();
+        doc2_process();
+        doc3_process();
         cof_process();
         beer_process();
         pills_process();

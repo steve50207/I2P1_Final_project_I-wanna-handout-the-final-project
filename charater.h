@@ -6,11 +6,23 @@ void charater_update();
 void character_draw();
 void character_destory();
 
-void doc_init();
-void doc_process();
-void doc_update();
-void doc_draw();
-void doc_destory();
+void doc1_init();
+void doc1_process();
+void doc1_update();
+void doc1_draw();
+void doc1_destory();
+
+void doc2_init();
+void doc2_process();
+void doc2_update();
+void doc2_draw();
+void doc2_destory();
+
+void doc3_init();
+void doc3_process();
+void doc3_update();
+void doc3_draw();
+void doc3_destory();
 
 void cof_init();
 void cof_process();

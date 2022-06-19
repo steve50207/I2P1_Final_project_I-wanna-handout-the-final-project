@@ -197,6 +197,10 @@ void character_destory(){
     al_destroy_bitmap(chara.img_move[7]);
 }
 
+
+
+////////////////////////////////////////////////////////////////doc1
+
 typedef struct doc
 {
     int x, y; // the position of image
@@ -205,61 +209,186 @@ typedef struct doc
     ALLEGRO_BITMAP *img_doc;
 
 }Doc;
-Doc doc;
 
-ALLEGRO_SAMPLE *get_doc_sample= NULL;
-ALLEGRO_SAMPLE_INSTANCE *get_doc_sound;
-int doc_count;
-void doc_init(){
-    doc.img_doc=al_load_bitmap("./image/score/document_blue.png");
+Doc doc1;
+
+ALLEGRO_SAMPLE *get_doc1_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_doc1_sound;
+
+void doc1_init(){
+    doc1.img_doc=al_load_bitmap("./image/score/document_blue.png");
     // initial the geometric information of character
-    doc.width = al_get_bitmap_width(doc.img_doc);
-    doc.height = al_get_bitmap_height(doc.img_doc);
-    doc.x = (int)rand()%1000;
-    doc.y = (int)rand()%700+100;
+    doc1.width = al_get_bitmap_width(doc1.img_doc);
+    doc1.height = al_get_bitmap_height(doc1.img_doc);
+    doc1.x = (int)rand()%1000;
+    doc1.y = (int)rand()%700+100;
     // load effective sound
-    get_doc_sample = al_load_sample("./sound/picking_file.wav");
-    get_doc_sound  = al_create_sample_instance(get_doc_sample);
+    get_doc1_sample = al_load_sample("./sound/picking_file.wav");
+    get_doc1_sound  = al_create_sample_instance(get_doc1_sample);
     // initial the animation component
-    doc.state = notgetdoc;
+    doc1.state = notgetdoc;
 }
 
 
-void doc_process(){
+void doc1_process(){
 
-    if(doc.x-67 <= chara.x && chara.x <= doc.x+48 && doc.y-100 <= chara.y && chara.y <= doc.y+48){
+    if(doc1.x-67 <= chara.x && chara.x <= doc1.x+48 && doc1.y-100 <= chara.y && chara.y <= doc1.y+48){
 
-            al_set_sample_instance_playmode(get_doc_sound, ALLEGRO_PLAYMODE_ONCE);
-            al_attach_sample_instance_to_mixer(get_doc_sound, al_get_default_mixer());
-            al_set_sample_instance_gain(get_doc_sound, 10);
-            al_play_sample_instance(get_doc_sound);
-            score+=5;
+        al_set_sample_instance_playmode(get_doc1_sound, ALLEGRO_PLAYMODE_ONCE);
+        al_attach_sample_instance_to_mixer(get_doc1_sound, al_get_default_mixer());
+        al_set_sample_instance_gain(get_doc1_sound, 10);
+        al_play_sample_instance(get_doc1_sound);
+        score+=5;
+        printf("%d\n",score);
+        doc1.state=getdoc;
+    }
+}
+
+int doc1_count;
+int doc1_closed;
+void doc1_update(){
+    doc1_count++;
+    if( doc1.state == getdoc ){
+        doc1_closed=1;
+        doc1_init();
+    }
+    if(doc1_count%240==0){
+        doc1_closed=0;
+        doc1_init();
+        printf("%d\n",doc1_count);
+    }
+}
+void doc1_draw(){
+    if(doc1_closed==1){}
+    if(doc1_closed==0||score==0){
+        al_draw_bitmap(doc1.img_doc, doc1.x, doc1.y, 0);
+    }
+}
+void doc1_destory(){
+    al_destroy_bitmap(doc1.img_doc);
+    al_destroy_sample_instance(get_doc1_sound);
+}
+
+////////////////////////////////////////////////////////////////doc2
+
+Doc doc2;
+
+ALLEGRO_SAMPLE *get_doc2_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_doc2_sound;
+
+void doc2_init(){
+    doc2.img_doc=al_load_bitmap("./image/score/document_green.png");
+    // initial the geometric information of character
+    doc2.width = al_get_bitmap_width(doc2.img_doc);
+    doc2.height = al_get_bitmap_height(doc2.img_doc);
+    doc2.x = (int)rand()%1000;
+    doc2.y = (int)rand()%700+100;
+    // load effective sound
+    get_doc2_sample = al_load_sample("./sound/picking_file.wav");
+    get_doc2_sound  = al_create_sample_instance(get_doc2_sample);
+    // initial the animation component
+    doc2.state = notgetdoc;
+}
+
+
+void doc2_process(){
+
+    if(doc2.x-67 <= chara.x && chara.x <= doc2.x+48 && doc2.y-100 <= chara.y && chara.y <= doc2.y+48){
+
+        al_set_sample_instance_playmode(get_doc2_sound, ALLEGRO_PLAYMODE_ONCE);
+        al_attach_sample_instance_to_mixer(get_doc2_sound, al_get_default_mixer());
+        al_set_sample_instance_gain(get_doc2_sound, 10);
+        al_play_sample_instance(get_doc2_sound);
+        printf("%d\n",score);
+        doc2.state=getdoc;
+    }
+}
+
+int doc2_count;
+int doc2_closed;
+void doc2_update(){
+    doc2_count++;
+    if( doc2.state == getdoc ){
+        doc2_closed=1;
+        doc2_init();
+    }
+    if(doc2_count%240==0){
+        doc2_closed=0;
+        doc2_init();
+        printf("%d\n",doc2_count);
+    }
+}
+
+void doc2_draw(){
+    if(doc2_closed==1){}
+    if(doc2_closed==0||score==0){
+        al_draw_bitmap(doc2.img_doc, doc2.x, doc2.y, 0);
+    }
+}
+
+void doc2_destory(){
+    al_destroy_bitmap(doc2.img_doc);
+    al_destroy_sample_instance(get_doc2_sound);
+}
+
+////////////////////////////////////////////////////////////////doc3
+
+Doc doc3;
+
+ALLEGRO_SAMPLE *get_doc3_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_doc3_sound;
+
+void doc3_init(){
+    doc3.img_doc=al_load_bitmap("./image/score/document_white.png");
+    // initial the geometric information of character
+    doc3.width = al_get_bitmap_width(doc3.img_doc);
+    doc3.height = al_get_bitmap_height(doc3.img_doc);
+    doc3.x = (int)rand()%1000;
+    doc3.y = (int)rand()%700+100;
+    // load effective sound
+    get_doc3_sample = al_load_sample("./sound/picking_file.wav");
+    get_doc3_sound  = al_create_sample_instance(get_doc3_sample);
+    // initial the animation component
+    doc3.state = notgetdoc;
+}
+
+
+void doc3_process(){
+
+    if(doc3.x-67 <= chara.x && chara.x <= doc3.x+48 && doc3.y-100 <= chara.y && chara.y <= doc3.y+48){
+
+            al_set_sample_instance_playmode(get_doc3_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_doc3_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_doc3_sound, 10);
+            al_play_sample_instance(get_doc3_sound);
             printf("%d\n",score);
-            doc.state=getdoc;
+            doc3.state=getdoc;
     }
 }
-int closed;
-void doc_update(){
-    doc_count++;
-    if( doc.state == getdoc ){
-        closed=1;
-        doc_init();
+
+int doc3_count;
+int doc3_closed;
+void doc3_update(){
+    doc3_count++;
+    if( doc3.state == getdoc ){
+        doc3_closed=1;
+        doc3_init();
     }
-    if(doc_count%300==0){
-        closed=0;
-        doc_init();
-        printf("%d\n",doc_count);
+    if(doc3_count%240==0){
+        doc3_closed=0;
+        doc3_init();
+        printf("%d\n",doc3_count);
     }
 }
-void doc_draw(){
-        if(closed==1){}
-        if(closed==0||score==0){
-            al_draw_bitmap(doc.img_doc, doc.x, doc.y, 0);
+void doc3_draw(){
+        if(doc3_closed==1){}
+        if(doc3_closed==0||score==0){
+            al_draw_bitmap(doc3.img_doc, doc3.x, doc3.y, 0);
         }
 }
-void doc_destory(){
-    al_destroy_bitmap(doc.img_doc);
-    al_destroy_sample_instance(get_doc_sound);
+void doc3_destory(){
+    al_destroy_bitmap(doc3.img_doc);
+    al_destroy_sample_instance(get_doc3_sound);
 }
 
 ///////////////////////////////////////////////////////////////////coffee
@@ -306,18 +435,26 @@ void cof_process(){
             printf("speed = %d\n", speed);
     }
 }
-
+int cof_closed;
 void cof_update(){
     cof_count++;
-    if( cof.state == getcof){
+    if( cof.state == getcof||cof_count%780==0){
+        cof_closed=1;
         cof_init();
     }
-    if(cof_count%600==0){
+    if(cof_count%601==0){
+        cof_closed=0;
         cof_init();
     }
 }
 void cof_draw(){
+    if(cof_closed==1||cof_count<601){
+        cof.x=-1000;
+        cof.y=-1000;
+    }
+    if(cof_closed==0&&cof_count>=601){
         al_draw_bitmap(cof.img_cof, cof.x, cof.y, 0);
+    }
 }
 void cof_destory(){
     al_destroy_bitmap(cof.img_cof);
@@ -367,18 +504,26 @@ void beer_process(){
             printf("speed = %d\n", speed);
     }
 }
-
+int beer_closed;
 void beer_update(){
     beer_count++;
-    if( beer.state == getbeer){
+    if( beer.state == getbeer||beer_count%962==0){
+        beer_closed=1;
         beer_init();
     }
-    if(beer_count%450==0){
+    if(beer_count%782==0){
+        beer_closed=0;
         beer_init();
     }
 }
 void beer_draw(){
+    if(beer_closed==1||beer_count<782){
+        beer.x=-1000;
+        beer.y=-1000;
+    }
+    if(beer_closed==0&&beer_count>=782){
         al_draw_bitmap(beer.img_beer, beer.x, beer.y, 0);
+    }
 }
 void beer_destory(){
     al_destroy_bitmap(beer.img_beer);
@@ -432,17 +577,24 @@ void pills_process(){
 
     }
 }
-
+int pills_closed;
 void pills_update(){
     pills_count++;
-    if( pills.state == getpills){
+    if( pills.state == getpills||pills_count%1143==0){
+        pills_closed=1;
         pills_init();
     }
-    if(pills_count%150==0){
+    if(pills_count%963==0){
+        pills_closed=0;
         pills_init();
     }
 }
 void pills_draw(){
+    if(pills_closed==1||pills_count<963){
+        pills.x=-1000;
+        pills.y=-1000;
+    }
+    if(pills_closed==0&&pills_count>=963)
         al_draw_bitmap(pills.img_pills, pills.x, pills.y, 0);
 }
 void pills_destory(){

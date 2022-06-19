@@ -127,7 +127,9 @@ void select_charater_destroy(){
 // function of game_scene
 void game_scene_init(){
     character_init();
-    doc_init();
+    doc1_init();
+    doc2_init();
+    doc3_init();
     cof_init();
     beer_init();
     pills_init();
@@ -145,7 +147,9 @@ void game_scene_init(){
 
 void game_scene_draw(){
     al_draw_bitmap(background, 0, 0, 0);
-    doc_draw();
+    doc1_draw();
+    doc2_draw();
+    doc3_draw();
     cof_draw();
     beer_draw();
     pills_draw();
@@ -157,7 +161,9 @@ void game_scene_draw(){
 void game_scene_destroy(){
     al_destroy_bitmap(background);
     character_destory();
-    doc_destory();
+    doc1_destory();
+    doc2_destory();
+    doc3_destory();
     cof_destory();
     beer_destory();
     pills_destory();

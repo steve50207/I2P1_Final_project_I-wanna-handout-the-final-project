@@ -27,8 +27,8 @@ void character_init(){
     // initial the geometric information of character
     chara.width = al_get_bitmap_width(chara.img_move[0]);
     chara.height = al_get_bitmap_height(chara.img_move[0]);
-    chara.x = (int)rand()%1200;
-    chara.y = (int)rand()%900;
+    chara.x = (int)rand()%1000;
+    chara.y = (int)rand()%700+100;
     chara.dir[0] = 1;
     chara.dir[1] = 0;
     chara.dir[2] = 0;
@@ -136,11 +136,11 @@ void charater_update(){
     game_time = (int)elapsed_time;                          //add
     sprintf(score_string,"score = %2d", score);             //add
     sprintf(time_string,"time = %2d", game_time);           //add
-    if(game_time== -1 && score < 60) {
+    if(game_time== 0 && score < 60) {
         judge_next_window =1;
         window =5;
     }
-    if(game_time == -1 && score > 60){
+    if(game_time == 0 && score >= 60){
         judge_next_window=1;
         window =4;
     }
@@ -216,7 +216,7 @@ void doc_init(){
     doc.width = al_get_bitmap_width(doc.img_doc);
     doc.height = al_get_bitmap_height(doc.img_doc);
     doc.x = (int)rand()%1000;
-    doc.y = (int)rand()%800;
+    doc.y = (int)rand()%700+100;
     // load effective sound
     get_doc_sample = al_load_sample("./sound/picking_file.wav");
     get_doc_sound  = al_create_sample_instance(get_doc_sample);
@@ -231,7 +231,7 @@ void doc_process(){
 
             al_set_sample_instance_playmode(get_doc_sound, ALLEGRO_PLAYMODE_ONCE);
             al_attach_sample_instance_to_mixer(get_doc_sound, al_get_default_mixer());
-            al_set_sample_instance_gain(get_doc_sound, 20);
+            al_set_sample_instance_gain(get_doc_sound, 10);
             al_play_sample_instance(get_doc_sound);
             score+=5;
             printf("%d\n",score);
@@ -283,7 +283,7 @@ void cof_init(){
     cof.width = al_get_bitmap_width(cof.img_cof);
     cof.height = al_get_bitmap_height(cof.img_cof);
     cof.x = (int)rand()%1000;
-    cof.y = (int)rand()%800;
+    cof.y = (int)rand()%700+100;
     // load effective sound
     get_cof_sample = al_load_sample("./sound/drinking_coffee.wav");
     get_cof_sound  = al_create_sample_instance(get_cof_sample);
@@ -298,11 +298,11 @@ void cof_process(){
 
             al_set_sample_instance_playmode(get_cof_sound, ALLEGRO_PLAYMODE_ONCE);
             al_attach_sample_instance_to_mixer(get_cof_sound, al_get_default_mixer());
-            al_set_sample_instance_gain(get_cof_sound, 20);
+            al_set_sample_instance_gain(get_cof_sound, 8);
             al_play_sample_instance(get_cof_sound);
             printf("get cof boost\n");
             cof.state=getcof;
-            speed++;
+            speed+=2;
             printf("speed = %d\n", speed);
     }
 }
@@ -344,9 +344,9 @@ void beer_init(){
     beer.width = al_get_bitmap_width(beer.img_beer);
     beer.height = al_get_bitmap_height(beer.img_beer);
     beer.x = (int)rand()%1000;
-    beer.y = (int)rand()%800;
+    beer.y = (int)rand()%700+100;
     // load effective sound
-    get_beer_sample = al_load_sample("./sound/drinking_alchol.wav");
+    get_beer_sample = al_load_sample("./sound/drinking_alcohol.wav");
     get_beer_sound  = al_create_sample_instance(get_beer_sample);
     // initial the animation component
     beer.state = notgetbeer;
@@ -359,11 +359,11 @@ void beer_process(){
 
             al_set_sample_instance_playmode(get_beer_sound, ALLEGRO_PLAYMODE_ONCE);
             al_attach_sample_instance_to_mixer(get_beer_sound, al_get_default_mixer());
-            al_set_sample_instance_gain(get_beer_sound, 10);
+            al_set_sample_instance_gain(get_beer_sound, 8);
             al_play_sample_instance(get_beer_sound);
             printf("get beer debuff\n");
             beer.state=getbeer;
-            speed--;
+            speed-=2;
             printf("speed = %d\n", speed);
     }
 }
@@ -405,7 +405,7 @@ void pills_init(){
     pills.width = al_get_bitmap_width(pills.img_pills);
     pills.height = al_get_bitmap_height(pills.img_pills);
     pills.x = (int)rand()%1000;
-    pills.y = (int)rand()%800;
+    pills.y = (int)rand()%700+100;
     // load effective sound
     get_pills_sample = al_load_sample("./sound/taking_pills.wav");
     get_pills_sound  = al_create_sample_instance(get_pills_sample);
@@ -420,7 +420,7 @@ void pills_process(){
 
             al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
             al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
-            al_set_sample_instance_gain(get_pills_sound, 10);
+            al_set_sample_instance_gain(get_pills_sound, 5);
             al_play_sample_instance(get_pills_sound);
             printf("get pills debuff\n");
             pills.state=getpills;

@@ -83,8 +83,13 @@ void select_charater_init()
     select_character_word1= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
     select_character_word2= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
     select_character_word3= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
+
     select_character_sample = al_load_sample("./sound/select_character.wav");
     select_character_sound = al_create_sample_instance(select_character_sample);
+    al_set_sample_instance_playmode(select_character_sound, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(select_character_sound, al_get_default_mixer());
+    al_set_sample_instance_gain(select_character_sound, 3);
+    al_play_sample_instance(select_character_sound);
 
 }
 
@@ -105,11 +110,6 @@ void select_charater_draw(){
     al_draw_text(select_character_word1, al_map_rgb(255, 255, 255), 280, 600, 0, "press A");
     al_draw_text(select_character_word2, al_map_rgb(255, 255, 255), 580, 600, 0, "press B");
     al_draw_text(select_character_word3, al_map_rgb(255, 255, 255), 880, 600, 0, "press C");
-
-    al_set_sample_instance_playmode(select_character_sound, ALLEGRO_PLAYMODE_ONCE);
-    al_attach_sample_instance_to_mixer(select_character_sound, al_get_default_mixer());
-    al_set_sample_instance_gain(select_character_sound, 3);
-    al_play_sample_instance(select_character_sound);
 
 }
 
@@ -137,6 +137,10 @@ void game_scene_init(){
 
     game_scene_sample = al_load_sample("./sound/game_bgm.wav");
     game_scene_sound = al_create_sample_instance(game_scene_sample);
+    al_set_sample_instance_playmode(game_scene_sound, ALLEGRO_PLAYMODE_LOOP);           //add
+    al_attach_sample_instance_to_mixer(game_scene_sound, al_get_default_mixer());       //add
+    al_set_sample_instance_gain(game_scene_sound, 1);                                   //add
+    al_play_sample_instance(game_scene_sound);                                          //add
 }
 
 void game_scene_draw(){
@@ -148,11 +152,6 @@ void game_scene_draw(){
     character_draw();
     al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
     al_draw_text(charater_time, al_map_rgb(0, 0, 0), 935, 10, 0, time_string);          //add
-    al_set_sample_instance_playmode(game_scene_sound, ALLEGRO_PLAYMODE_LOOP);           //add
-    al_attach_sample_instance_to_mixer(game_scene_sound, al_get_default_mixer());       //add
-    al_set_sample_instance_gain(game_scene_sound, 1);                                   //add
-    al_play_sample_instance(game_scene_sound);                                          //add
-
 }
 
 void game_scene_destroy(){
@@ -174,25 +173,25 @@ void win_scene_init(){
     al_init_acodec_addon();
     win = al_load_bitmap("./image/scene/wining.png");
 
-    win_word= al_load_ttf_font("./font/pirulen.ttf", 50, 0);
+    win_word= al_load_ttf_font("./font/pirulen.ttf", 40, 0);
+
     win_sample = al_load_sample("./sound/game_succeed.wav");
     win_sound = al_create_sample_instance(win_sample);
+    al_set_sample_instance_playmode(win_sound, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(win_sound, al_get_default_mixer());
+    al_set_sample_instance_gain(win_sound, 3);
+    al_play_sample_instance(win_sound);
 }
 
 void win_scene_process(ALLEGRO_EVENT event){
     if( event.type == ALLEGRO_EVENT_KEY_UP )
         if( event.keyboard.keycode == ALLEGRO_KEY_ENTER )
             judge_next_window = true;
-
 }
 
 void win_scene_draw(){
     al_draw_bitmap(win, 0, 0, 0);
-    al_draw_text(win_word, al_map_rgb(255, 255, 255), 250, 450, 0, "YOU ARE PASSED");
-    al_set_sample_instance_playmode(win_sound, ALLEGRO_PLAYMODE_ONCE);
-    al_attach_sample_instance_to_mixer(win_sound, al_get_default_mixer());
-    al_set_sample_instance_gain(win_sound, 3);
-    al_play_sample_instance(win_sound);
+    al_draw_text(win_word, al_map_rgb(255, 255, 255), 650, 315, 0, "YOU ARE PASSED");
 }
 
 void win_scene_destroy(){
@@ -208,9 +207,14 @@ void lose_scene_init(){
     al_init_acodec_addon();
     lose = al_load_bitmap("./image/scene/losing.png");
 
-    lose_word= al_load_ttf_font("./font/pirulen.ttf", 50, 0);
+    lose_word= al_load_ttf_font("./font/pirulen.ttf", 40, 0);
     lose_sample = al_load_sample("./sound/game_fail.wav");
+
     lose_sound = al_create_sample_instance(lose_sample);
+    al_set_sample_instance_playmode(lose_sound, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(lose_sound, al_get_default_mixer());
+    al_set_sample_instance_gain(lose_sound, 3);
+    al_play_sample_instance(lose_sound);
 }
 
 void lose_scene_process(ALLEGRO_EVENT event){
@@ -221,11 +225,7 @@ void lose_scene_process(ALLEGRO_EVENT event){
 
 void lose_scene_draw(){
     al_draw_bitmap(lose, 0, 0, 0);
-    al_draw_text(lose_word, al_map_rgb(255, 255, 255), 527, 219, 0, "YOU ARE FAILED");
-    al_set_sample_instance_playmode(lose_sound, ALLEGRO_PLAYMODE_ONCE);
-    al_attach_sample_instance_to_mixer(lose_sound, al_get_default_mixer());
-    al_set_sample_instance_gain(lose_sound, 3);
-    al_play_sample_instance(lose_sound);
+    al_draw_text(lose_word, al_map_rgb(255, 255, 255), 695, 280, 0, "YOU ARE FAILED");
 }
 
 void lose_scene_destroy(){

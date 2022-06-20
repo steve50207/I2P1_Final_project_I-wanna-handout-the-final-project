@@ -42,3 +42,8 @@ void pills_update();
 void pills_draw();
 void pills_destory();
 
+void past_exam_init();
+void past_exam_update();
+void past_exam_process();
+void past_exam_draw();
+void past_exam_destory();

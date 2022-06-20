@@ -1,7 +1,7 @@
 #include "charater.h"
 
 // the state of character
-enum {STOP = 0, MOVE, getdoc, notgetdoc, getcof, notgetcof, getbeer, notgetbeer, getpills, notgetpills};
+enum {STOP = 0, MOVE, getdoc, notgetdoc, getcof, notgetcof, getbeer, notgetbeer, getpills, notgetpills, getpast_exam, notgetpast_exam};
 typedef struct character
 {
     int x, y; // the position of image
@@ -238,7 +238,13 @@ void doc1_process(){
         al_attach_sample_instance_to_mixer(get_doc1_sound, al_get_default_mixer());
         al_set_sample_instance_gain(get_doc1_sound, 10);
         al_play_sample_instance(get_doc1_sound);
-        score+=5;
+        if(changecolor==1)
+        {
+                score+=10;
+        }else if(changecolor==0)
+        {
+            score+=5;
+        }
         printf("%d\n",score);
         doc1.state=getdoc;
     }
@@ -255,7 +261,7 @@ void doc1_update(){
     if(doc1_count%240==0){
         doc1_closed=0;
         doc1_init();
-        printf("%d\n",doc1_count);
+        //printf("%d\n",doc1_count);
     }
 }
 void doc1_draw(){
@@ -299,6 +305,9 @@ void doc2_process(){
         al_attach_sample_instance_to_mixer(get_doc2_sound, al_get_default_mixer());
         al_set_sample_instance_gain(get_doc2_sound, 10);
         al_play_sample_instance(get_doc2_sound);
+        if(changecolor==1){
+            score+=10;
+        }
         printf("%d\n",score);
         doc2.state=getdoc;
     }
@@ -315,14 +324,18 @@ void doc2_update(){
     if(doc2_count%240==0){
         doc2_closed=0;
         doc2_init();
-        printf("%d\n",doc2_count);
+        //printf("%d\n",doc2_count);
     }
 }
 
 void doc2_draw(){
     if(doc2_closed==1){}
     if(doc2_closed==0||score==0){
-        al_draw_bitmap(doc2.img_doc, doc2.x, doc2.y, 0);
+        if(changecolor==1){
+            al_draw_bitmap(doc1.img_doc, doc2.x, doc2.y, 0);
+        }else{
+            al_draw_bitmap(doc2.img_doc, doc2.x, doc2.y, 0);
+        }
     }
 }
 
@@ -361,6 +374,9 @@ void doc3_process(){
             al_attach_sample_instance_to_mixer(get_doc3_sound, al_get_default_mixer());
             al_set_sample_instance_gain(get_doc3_sound, 10);
             al_play_sample_instance(get_doc3_sound);
+            if(changecolor==1){
+                 score+=10;
+            }
             printf("%d\n",score);
             doc3.state=getdoc;
     }
@@ -377,14 +393,18 @@ void doc3_update(){
     if(doc3_count%240==0){
         doc3_closed=0;
         doc3_init();
-        printf("%d\n",doc3_count);
+        //printf("%d\n",doc3_count);
     }
 }
 void doc3_draw(){
         if(doc3_closed==1){}
         if(doc3_closed==0||score==0){
-            al_draw_bitmap(doc3.img_doc, doc3.x, doc3.y, 0);
-        }
+            if(changecolor==1){
+                al_draw_bitmap(doc1.img_doc, doc3.x, doc3.y, 0);
+            }else{
+                al_draw_bitmap(doc3.img_doc, doc3.x, doc3.y, 0);
+            }
+      }
 }
 void doc3_destory(){
     al_destroy_bitmap(doc3.img_doc);
@@ -600,4 +620,78 @@ void pills_draw(){
 void pills_destory(){
     al_destroy_bitmap(pills.img_pills);
     al_destroy_sample_instance(get_pills_sound);
+}
+
+//////////////////////////////////////////////////////////
+typedef struct past_exam
+{
+    int x, y; // the position of image
+    int width, height; // the width and height of image
+    int state; // the state of icon get/not get;
+    ALLEGRO_BITMAP *img_past_exam;
+
+}Past_exam;
+Past_exam past_exam;
+
+ALLEGRO_SAMPLE *get_past_exam_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *get_past_exam_sound;
+int past_exam_count;
+void past_exam_init(){
+    past_exam.img_past_exam=al_load_bitmap("./image/booster/past_exam.png");
+    // initial the geometric information of character
+    past_exam.width = al_get_bitmap_width(past_exam.img_past_exam);
+    past_exam.height = al_get_bitmap_height(past_exam.img_past_exam);
+    past_exam.x = (int)rand()%1000;
+    past_exam.y = (int)rand()%700+100;
+    // load effective sound
+    get_past_exam_sample = al_load_sample("./sound/picking_past_exam.wav");
+    get_past_exam_sound  = al_create_sample_instance(get_past_exam_sample);
+    // initial the animation component
+    past_exam.state = notgetpast_exam;
+}
+
+
+void past_exam_process(){
+
+    if(past_exam.x-67<= chara.x && chara.x <= past_exam.x+48 && past_exam.y-100 <= chara.y && chara.y <= past_exam.y+48){
+
+            al_set_sample_instance_playmode(get_past_exam_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_past_exam_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_past_exam_sound, 5);
+            al_play_sample_instance(get_past_exam_sound);
+            printf("get past exam buff\n");
+            past_exam.state=getpast_exam;
+
+    }
+}
+
+int past_exam_closed;
+void past_exam_update(){
+    past_exam_count++;
+    if( past_exam.state == getpast_exam||past_exam_count%541==0){
+        if(past_exam_count%541!=0&&past_exam.state == getpast_exam){
+            changecolor=1;
+        }
+        else{
+            changecolor=0;
+        }
+        past_exam_closed=1;
+        past_exam_init();
+    }
+    if(past_exam_count%361==0){
+        past_exam_closed=0;
+        past_exam_init();
+    }
+}
+void past_exam_draw(){
+    if(past_exam_closed==1||past_exam_count<361){
+        past_exam.x=-1000;
+        past_exam.y=-1000;
+    }
+    if(past_exam_closed==0&&past_exam_count>=361)
+        al_draw_bitmap(past_exam.img_past_exam, past_exam.x, past_exam.y, 0);
+}
+void past_exam_destory(){
+    al_destroy_bitmap(past_exam.img_past_exam);
+    al_destroy_sample_instance(get_past_exam_sound);
 }

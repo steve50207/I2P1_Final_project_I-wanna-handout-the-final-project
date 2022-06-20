@@ -16,4 +16,5 @@ int game_time = 0;                   //add
 char time_string[50]={'\0'};         //add
 int speed = 0;                       //add
 bool change_direction = false;       //add
+int changecolor = 0;                 //add
 int window = 1;                      //add

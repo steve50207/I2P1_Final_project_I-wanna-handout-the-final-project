@@ -133,6 +133,7 @@ void game_scene_init(){
     cof_init();
     beer_init();
     pills_init();
+    past_exam_init();
     background = al_load_bitmap("./image/scene/gaming_1.png");
     charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);            //add
     charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);             //add
@@ -153,6 +154,7 @@ void game_scene_draw(){
     cof_draw();
     beer_draw();
     pills_draw();
+    past_exam_draw();
     character_draw();
     al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
     al_draw_text(charater_time, al_map_rgb(0, 0, 0), 935, 10, 0, time_string);          //add
@@ -167,6 +169,7 @@ void game_scene_destroy(){
     cof_destory();
     beer_destory();
     pills_destory();
+    past_exam_destory();
     al_destroy_font(charater_score);                                                    //add
     al_destroy_font(charater_time);                                                     //add
     al_destroy_sample_instance(game_scene_sound);                                       //add

@@ -97,6 +97,7 @@ void game_update(){
         cof_update();
         beer_update();
         pills_update();
+        past_exam_update();
     }
 
     if(judge_next_window ==1 && window == 4){
@@ -130,6 +131,7 @@ int process_event(){
         cof_process();
         beer_process();
         pills_process();
+        past_exam_process();
     }else if(window == 4){
         win_scene_process(event);
         if(judge_next_window == 1)return -1;

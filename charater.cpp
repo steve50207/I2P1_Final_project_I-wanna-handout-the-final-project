@@ -238,10 +238,8 @@ void doc1_process(){
         al_attach_sample_instance_to_mixer(get_doc1_sound, al_get_default_mixer());
         al_set_sample_instance_gain(get_doc1_sound, 10);
         al_play_sample_instance(get_doc1_sound);
+        score+=5;
         if(changecolor==1)
-        {
-                score+=10;
-        }else if(changecolor==0)
         {
             score+=5;
         }

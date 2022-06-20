@@ -8,9 +8,6 @@ ALLEGRO_SAMPLE *song=NULL;
 ALLEGRO_SAMPLE_INSTANCE *menu_Sound;
 
 ALLEGRO_BITMAP *illustration =NULL;
-ALLEGRO_FONT *illustration_word1= NULL;
-ALLEGRO_FONT *illustration_word2= NULL;
-ALLEGRO_FONT *illustration_word3= NULL;
 ALLEGRO_SAMPLE *illustration_sample= NULL;
 ALLEGRO_SAMPLE_INSTANCE *illustration_sound;
 
@@ -109,9 +106,6 @@ void illustration_init()
     al_init_acodec_addon();
     illustration = al_load_bitmap("./image/scene/illustration.png");
 
-    illustration_word1= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
-    illustration_word2= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
-    illustration_word3= al_load_ttf_font("./font/MushroomKidsDemoRegular.ttf", 50, 0);
     illustration_sample = al_load_sample("./sound/menu_music.wav");
     illustration_sound = al_create_sample_instance(illustration_sample);
     al_set_sample_instance_playmode(illustration_sound, ALLEGRO_PLAYMODE_LOOP);
@@ -128,17 +122,10 @@ void illustration_process(ALLEGRO_EVENT event)
 void illustration_draw()
 {
     al_draw_bitmap(illustration, 0, 0, 0);
-    al_draw_text(illustration_word1, al_map_rgb(255, 255, 255), 33, 515, 0, "opposite direction");
-    al_draw_text(illustration_word2, al_map_rgb(255, 255, 255), 523, 515, 0, "booster");
-    al_draw_text(illustration_word3, al_map_rgb(255, 255, 255), 880, 515, 0, "reducer");
 }
 void illustration_destroy()
 {
     al_destroy_bitmap(illustration);
-
-    al_destroy_font(illustration_word1);
-    al_destroy_font(illustration_word2);
-    al_destroy_font(illustration_word3);
     al_destroy_sample_instance(illustration_sound);
 }
 

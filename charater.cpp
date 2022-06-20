@@ -458,21 +458,21 @@ void cof_process(){
 int cof_closed;
 void cof_update(){
     cof_count++;
-    if( cof.state == getcof||cof_count%780==0){
+    if( cof.state == getcof||cof_count==1500||cof_count==3300){
         cof_closed=1;
         cof_init();
     }
-    if(cof_count%601==0){
+    if(cof_count==1200||cof_count==3000){
         cof_closed=0;
         cof_init();
     }
 }
 void cof_draw(){
-    if(cof_closed==1||cof_count<601){
+    if(cof_closed==1||cof_count<1200){
         cof.x=-1000;
         cof.y=-1000;
     }
-    if(cof_closed==0&&cof_count>=601){
+    if(cof_closed==0&&cof_count>=1200){
         al_draw_bitmap(cof.img_cof, cof.x, cof.y, 0);
     }
 }
@@ -527,21 +527,21 @@ void beer_process(){
 int beer_closed;
 void beer_update(){
     beer_count++;
-    if( beer.state == getbeer||beer_count%962==0){
+    if( beer.state == getbeer||beer_count==600||beer_count==2400){
         beer_closed=1;
         beer_init();
     }
-    if(beer_count%782==0){
+    if(beer_count==300||beer_count==2100){
         beer_closed=0;
         beer_init();
     }
 }
 void beer_draw(){
-    if(beer_closed==1||beer_count<782){
+    if(beer_closed==1||beer_count<300){
         beer.x=-1000;
         beer.y=-1000;
     }
-    if(beer_closed==0&&beer_count>=782){
+    if(beer_closed==0&&beer_count>=300){
         al_draw_bitmap(beer.img_beer, beer.x, beer.y, 0);
     }
 }
@@ -600,21 +600,21 @@ void pills_process(){
 int pills_closed;
 void pills_update(){
     pills_count++;
-    if( pills.state == getpills||pills_count%1143==0){
+    if( pills.state == getpills||pills_count==1200||pills_count==3000){
         pills_closed=1;
         pills_init();
     }
-    if(pills_count%963==0){
+    if(pills_count==900||pills_count==2700){
         pills_closed=0;
         pills_init();
     }
 }
 void pills_draw(){
-    if(pills_closed==1||pills_count<963){
+    if(pills_closed==1||pills_count<900){
         pills.x=-1000;
         pills.y=-1000;
     }
-    if(pills_closed==0&&pills_count>=963)
+    if(pills_closed==0&&pills_count>=900)
         al_draw_bitmap(pills.img_pills, pills.x, pills.y, 0);
 }
 void pills_destory(){
@@ -668,8 +668,8 @@ void past_exam_process(){
 int past_exam_closed;
 void past_exam_update(){
     past_exam_count++;
-    if( past_exam.state == getpast_exam||past_exam_count%541==0){
-        if(past_exam_count%541!=0&&past_exam.state == getpast_exam){
+    if( past_exam.state == getpast_exam||past_exam_count%660==0){
+        if(past_exam_count%660!=0&&past_exam.state == getpast_exam){
             changecolor=1;
         }
         else{
@@ -678,17 +678,17 @@ void past_exam_update(){
         past_exam_closed=1;
         past_exam_init();
     }
-    if(past_exam_count%361==0){
+    if(past_exam_count%480==0){
         past_exam_closed=0;
         past_exam_init();
     }
 }
 void past_exam_draw(){
-    if(past_exam_closed==1||past_exam_count<361){
+    if(past_exam_closed==1||past_exam_count<480){
         past_exam.x=-1000;
         past_exam.y=-1000;
     }
-    if(past_exam_closed==0&&past_exam_count>=361)
+    if(past_exam_closed==0&&past_exam_count>=480)
         al_draw_bitmap(past_exam.img_past_exam, past_exam.x, past_exam.y, 0);
 }
 void past_exam_destory(){

@@ -20,7 +20,7 @@ void character_init(){
     // load character images
     for(int i = 1 ; i <= 8 ; i++){
         char temp[50];
-        sprintf( temp, "./image/character01/char01_move%d.png", i );
+        sprintf( temp, "./image/character0%d/char0%d_move%d.png", select_character, select_character , i );
         chara.img_move[i-1] = al_load_bitmap(temp);
     }
 
@@ -136,13 +136,13 @@ void charater_update(){
     game_time = (int)elapsed_time;                          //add
     sprintf(score_string,"score = %2d", score);             //add
     sprintf(time_string,"time = %2d", game_time);           //add
-    if(game_time== 0 && score < 60) {
-        judge_next_window =1;
-        window =5;
-    }
     if(game_time == 0 && score >= 60){
-        judge_next_window=1;
-        window =4;
+        judge_next_window =1;
+        window = 5;
+    }
+     if(game_time == 0 && score < 60) {
+        judge_next_window =1;
+        window = 6;
     }
 
 }

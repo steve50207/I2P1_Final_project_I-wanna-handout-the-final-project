@@ -6,8 +6,6 @@ const char *title = "I wanna handout the final project!";
 
 // ALLEGRO Variables
 ALLEGRO_DISPLAY* display = NULL;
-ALLEGRO_SAMPLE *song=NULL;
-ALLEGRO_SAMPLE_INSTANCE *menu_Sound;
 
 int Game_establish() {
     int msg = 0;
@@ -59,37 +57,34 @@ void game_init() {
 
 void game_begin() {
     // Load sound
-    song = al_load_sample("./sound/menu_music.wav");
     al_reserve_samples(20);
-    menu_Sound = al_create_sample_instance(song);
-    // Loop the song until the display closes
-    al_set_sample_instance_playmode(menu_Sound, ALLEGRO_PLAYMODE_LOOP);
-    al_restore_default_mixer();
-    al_attach_sample_instance_to_mixer(menu_Sound, al_get_default_mixer());
-    // set the volume of instance
-    al_set_sample_instance_gain(menu_Sound, 1) ;
-    al_play_sample_instance(menu_Sound);
     al_start_timer(fps);
     // initialize the menu before entering the loop
     menu_init();
 
 }
+
 void game_update(){
+
     if( judge_next_window ==1 && window ==1 ){
             // not back menu anymore, therefore destroy it
-            menu_destroy();
-            al_destroy_sample_instance(menu_Sound);
+        menu_destroy();
             // initialize next scene
-            select_charater_init();
-            judge_next_window = false;
-            window = 2;
+        illustration_init();
+        judge_next_window = false;
+        window = 2;
+
     }else if( judge_next_window ==1 && window == 2 ){
-            select_charater_destroy();
-            game_scene_init();
-            judge_next_window = false;
-            window = 3;
-    }
-    else if(window == 3){
+        illustration_destroy();
+        select_charater_init();
+        judge_next_window = false;
+        window = 3;
+    }else if(judge_next_window ==1 && window == 3){
+        select_charater_destroy();
+        game_scene_init();
+        judge_next_window = false;
+        window = 4;
+    }else if(window == 4){
         charater_update();
         doc1_update();
         doc2_update();
@@ -100,13 +95,13 @@ void game_update(){
         past_exam_update();
     }
 
-    if(judge_next_window ==1 && window == 4){
+    if(judge_next_window ==1 && window == 5){
 
         game_scene_destroy();
         win_scene_init();
         judge_next_window =false;
 
-    }else if(judge_next_window ==1 && window == 5){
+    }else if(judge_next_window ==1 && window == 6){
 
         game_scene_destroy();
         lose_scene_init();
@@ -114,6 +109,7 @@ void game_update(){
 
     }
 }
+
 int process_event(){
     // Request the event
     ALLEGRO_EVENT event;
@@ -121,9 +117,13 @@ int process_event(){
     // process the event of other component
     if( window == 1 ){
         menu_process(event);
+        if( esc == 1)return -1;
     }else if( window == 2 ){
-        select_charater_process(event);
+        illustration_process(event);
     }else if( window == 3 ){
+        select_charater_process(event);
+
+    }else if(window == 4){
         charater_process(event);
         doc1_process();
         doc2_process();
@@ -132,11 +132,11 @@ int process_event(){
         beer_process();
         pills_process();
         past_exam_process();
-    }else if(window == 4){
+    }else if(window == 5){
         win_scene_process(event);
         if(judge_next_window == 1)return -1;
         //printf("process window4\n");
-    }else if(window == 5){
+    }else if(window == 6){
         lose_scene_process(event);
         if(judge_next_window == 1)return -1;
     }
@@ -150,21 +150,25 @@ int process_event(){
     if(draw) game_update();
     return 0;
 }
+
 void game_draw(){
     if( window == 1 ){
         menu_draw();
-    }else if( window == 2 ){
-        select_charater_draw();
+    }else if( window == 2){
+        illustration_draw();
     }else if( window == 3 ){
+        select_charater_draw();
+    }else if( window == 4 ){
         game_scene_draw();
-    }else if(window == 4){
-        win_scene_draw();
     }else if(window == 5){
+        win_scene_draw();
+    }else if(window == 6){
         lose_scene_draw();
     }
 
     al_flip_display();
 }
+
 int game_run() {
     int error = 0;
     if( draw ){

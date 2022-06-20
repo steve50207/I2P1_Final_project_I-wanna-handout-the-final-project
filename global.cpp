@@ -18,3 +18,5 @@ int speed = 0;                       //add
 bool change_direction = false;       //add
 int changecolor = 0;                 //add
 int window = 1;                      //add
+int select_character = 0;            //add
+int esc = 0;                         //add

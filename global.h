@@ -29,5 +29,7 @@ extern int speed;               //add
 extern bool change_direction;   //add
 extern int changecolor;         //add
 extern int window;              //add
+extern int select_character;    //add
+extern int esc;                 //add
 
 #endif

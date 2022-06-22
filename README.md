@@ -2,6 +2,10 @@
 
 ## Game Name: I wanna handout the final project!
 
+## How to download the game
+-- Download the 'I wanna handout the final project!.zip' then unzip.
+   Execute the 'I wanna handout the final project!.exe' to play.
+
 ## Game Target
 - Collect the documents to get scores in one minute as higher as possible
 - Take advantage of buff and debuff to higher scores

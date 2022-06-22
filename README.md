@@ -7,23 +7,20 @@
 - Execute the I wanna handout the final project!.exe and start to play.
 
 ## Game Target
-- Collect the documents to get scores in one minute as higher as possible
-- Take advantage of buff and debuff to higher scores
+- Collect the documents to get 60 scores in one minute.
+- Take advantage of buff and debuff to higher scores.
 
 ## How to controll
-- Need to change IME setting to English  
-- Use keyboard WASD to controller the charater
+- Need to change IME setting to English  .
+- Use keyboard WASD to controller the charater.
 
 ## Credit
 - This project is made by Grace and YenTing and Steve.
-  Apperciate their effort for the final project!
+- Apperciate their effort for the final project!
 
 ## Future Development Direction
-- Modify buff and debuff show up frequency
-- Add 2P Character so that it may have PVP mode
-
-
-
+- Modify buff and debuff show up frequency.
+- Add 2P Character so that it may have PVP mode.
 
 ## Reference Resource
 

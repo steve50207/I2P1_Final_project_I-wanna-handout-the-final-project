@@ -8,7 +8,7 @@
 
 ## Game Target
 - Collect the documents to get 60 scores in one minute.
-- Take advantage of buff and debuff to higher scores.
+- Take advantage of buff and debuff to get higher scores.
 
 ## How to controll
 - Need to change IME setting to English  .

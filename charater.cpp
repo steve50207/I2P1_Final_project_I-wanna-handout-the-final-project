@@ -410,7 +410,7 @@ void doc3_destory(){
 }
 
 ///////////////////////////////////////////////////////////////////coffee
-int cof_count;
+
 typedef struct coffee
 {
     int x, y; // the position of image
@@ -449,10 +449,14 @@ void cof_process(){
             al_play_sample_instance(get_cof_sound);
             printf("get cof boost\n");
             cof.state=getcof;
-            speed+=2;
+            if(5+speed<9){
+                speed+=2;
+            }
             printf("speed = %d\n", speed);
     }
 }
+
+int cof_count;
 int cof_closed;
 void cof_update(){
     cof_count++;
@@ -492,7 +496,7 @@ Beer beer;
 
 ALLEGRO_SAMPLE *get_beer_sample= NULL;
 ALLEGRO_SAMPLE_INSTANCE *get_beer_sound;
-int beer_count;
+
 void beer_init(){
     beer.img_beer=al_load_bitmap("./image/debuff/beer3.png");
     // initial the geometric information of character
@@ -518,10 +522,14 @@ void beer_process(){
             al_play_sample_instance(get_beer_sound);
             printf("get beer debuff\n");
             beer.state=getbeer;
-            speed-=2;
+            if(5+speed>1){
+                speed-=2;
+            }
             printf("speed = %d\n", speed);
     }
 }
+
+int beer_count;
 int beer_closed;
 void beer_update(){
     beer_count++;
@@ -561,7 +569,7 @@ Pill pills;
 
 ALLEGRO_SAMPLE *get_pills_sample= NULL;
 ALLEGRO_SAMPLE_INSTANCE *get_pills_sound;
-int pills_count;
+
 void pills_init(){
     pills.img_pills=al_load_bitmap("./image/debuff/pills2.png");
     // initial the geometric information of character
@@ -579,22 +587,79 @@ void pills_init(){
 
 void pills_process(){
 
-    if(pills.x-67<= chara.x && chara.x <= pills.x+48 && pills.y-100 <= chara.y && chara.y <= pills.y+48){
+    //charater dir is left and collide with pill from right side
+    if( chara.dir[1] ==1 && pills.x <= chara.x && chara.x <= pills.x+48 && pills.y-100 <= chara.y && chara.y <= pills.y+48){
 
             al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
             al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
             al_set_sample_instance_gain(get_pills_sound, 5);
             al_play_sample_instance(get_pills_sound);
-            printf("get pills debuff\n");
+
             pills.state=getpills;
+            printf("get pills debuff\n");
+
+            chara.x+=5;
+
             if(change_direction==false){
                 change_direction =true;
             }else{
                 change_direction =false;
             }
+    //charater dir is right and collide with pill from left side
+    }else if(chara.dir[3] ==1 && pills.x-67 <= chara.x && chara.x <= pills.x && pills.y-100 <= chara.y && chara.y <= pills.y+48){
 
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 5);
+            al_play_sample_instance(get_pills_sound);
+
+            pills.state=getpills;
+            printf("get pills debuff\n");
+
+            chara.x-=5;
+            if(change_direction==false){
+                change_direction =true;
+            }else{
+                change_direction =false;
+            }
+    //charater dir is down and collide with pill from top side
+    }else if(chara.dir[0] ==1 && pills.y-100 <= chara.y && chara.y <= pills.y && pills.x-67 <= chara.x && chara.x <= pills.x+48){
+
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 5);
+            al_play_sample_instance(get_pills_sound);
+
+            pills.state=getpills;
+            printf("get pills debuff\n");
+
+            chara.y-=5;
+            if(change_direction==false){
+                change_direction =true;
+            }else{
+                change_direction =false;
+            }
+    //charater dir is up and collide with pill from bottom side
+    }else if(chara.dir[2] ==1 && pills.y <= chara.y && chara.y <= pills.y+48 && pills.x-67 <= chara.x && chara.x <= pills.x+48){
+
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 5);
+            al_play_sample_instance(get_pills_sound);
+
+            pills.state=getpills;
+            printf("get pills debuff\n");
+
+            chara.y+=5;
+            if(change_direction==false){
+                change_direction =true;
+            }else{
+                change_direction =false;
+            }
     }
 }
+
+int pills_count;
 int pills_closed;
 void pills_update(){
     pills_count++;
@@ -633,7 +698,7 @@ Past_exam past_exam;
 
 ALLEGRO_SAMPLE *get_past_exam_sample= NULL;
 ALLEGRO_SAMPLE_INSTANCE *get_past_exam_sound;
-int past_exam_count;
+
 void past_exam_init(){
     past_exam.img_past_exam=al_load_bitmap("./image/booster/past_exam.png");
     // initial the geometric information of character
@@ -663,6 +728,7 @@ void past_exam_process(){
     }
 }
 
+int past_exam_count;
 int past_exam_closed;
 void past_exam_update(){
     past_exam_count++;

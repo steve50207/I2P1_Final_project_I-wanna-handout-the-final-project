@@ -86,6 +86,7 @@ void game_update(){
         window = 4;
     }else if(window == 4){
         charater_update();
+        charater2_update();
         doc1_update();
         doc2_update();
         doc3_update();
@@ -125,6 +126,7 @@ int process_event(){
 
     }else if(window == 4){
         charater_process(event);
+        charater2_process(event);
         doc1_process();
         doc2_process();
         doc3_process();

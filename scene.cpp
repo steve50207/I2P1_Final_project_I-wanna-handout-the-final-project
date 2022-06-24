@@ -22,6 +22,7 @@ ALLEGRO_SAMPLE *select_character_sample= NULL;
 ALLEGRO_SAMPLE_INSTANCE *select_character_sound;
 
 ALLEGRO_FONT *charater_score= NULL;         //add
+ALLEGRO_FONT *charater2_score=NULL;
 ALLEGRO_FONT *charater_time= NULL;          //add
 ALLEGRO_SAMPLE *game_scene_sample= NULL;    //add
 ALLEGRO_SAMPLE_INSTANCE *game_scene_sound;  //add
@@ -204,6 +205,7 @@ void select_charater_destroy()
 void game_scene_init()
 {
     character_init();
+    character2_init();
     doc1_init();
     doc2_init();
     doc3_init();
@@ -214,6 +216,7 @@ void game_scene_init()
     background = al_load_bitmap("./image/scene/gaming_1.png");
     charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);            //add
     charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);             //add
+    charater2_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);
 
     game_scene_sample = al_load_sample("./sound/game_bgm.wav");
     game_scene_sound = al_create_sample_instance(game_scene_sample);
@@ -234,14 +237,17 @@ void game_scene_draw()
     pills_draw();
     past_exam_draw();
     character_draw();
+    character2_draw();
     al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
     al_draw_text(charater_time, al_map_rgb(0, 0, 0), 935, 10, 0, time_string);          //add
+    al_draw_text(charater2_score, al_map_rgb(0, 0, 0), 35, 40, 0, charater2_score_string);
 }
 
 void game_scene_destroy()
 {
     al_destroy_bitmap(background);
     character_destory();
+    character2_destory();
     doc1_destory();
     doc2_destory();
     doc3_destory();

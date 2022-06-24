@@ -14,7 +14,6 @@ typedef struct character
 }Character;
 Character chara;
 
-
 ALLEGRO_SAMPLE *sample = NULL;
 void character_init(){
     // load character images
@@ -196,7 +195,190 @@ void character_destory(){
     al_destroy_bitmap(chara.img_move[6]);
     al_destroy_bitmap(chara.img_move[7]);
 }
+////////////////////////////////////////////////////////////////chara2
 
+Character chara2;
+ALLEGRO_SAMPLE *sample2 = NULL;
+void character2_init(){
+    // load character images
+    for(int i = 1 ; i <= 8 ; i++){
+        char temp[50];
+        sprintf( temp, "./image/character0%d/char0%d_move%d.png", 2, 2 , i );
+        chara2.img_move[i-1] = al_load_bitmap(temp);
+    }
+
+    // initial the geometric information of character
+    chara2.width = al_get_bitmap_width(chara2.img_move[0]);
+    chara2.height = al_get_bitmap_height(chara2.img_move[0]);
+    chara2.x = (int)rand()%1000;
+    chara2.y = (int)rand()%700+100;
+    chara2.dir[0] = 1;
+    chara2.dir[1] = 0;
+    chara2.dir[2] = 0;
+    chara2.dir[3] = 0;
+
+    // initial the animation component
+    chara2.state = STOP;
+    chara2.anime = 0;
+    chara2.anime_time = 30;
+
+    //initial counting component
+    ts = al_get_time();                         //add
+    sprintf(charater2_score_string,"(2) score = %2d", 0);     //add
+    //sprintf(time_string,"(2) time = %2d", 61);      //add
+
+}
+void charater2_process(ALLEGRO_EVENT event){
+    // process the animation
+    if( event.type == ALLEGRO_EVENT_TIMER ){
+        if( event.timer.source == fps ){
+            chara2.anime++;
+            chara2.anime %= chara2.anime_time;
+        }
+    // process the keyboard event
+   }/*else if( event.type == ALLEGRO_EVENT_KEY_DOWN ){
+        key_state[event.keyboard.keycode] = true;
+        chara2.anime = 0;
+    }else if( event.type == ALLEGRO_EVENT_KEY_UP ){
+        key_state[event.keyboard.keycode] = false;
+    }*/
+}
+void charater2_update(){
+    // use the idea of finite state machine to deal with different state
+    if( key_state[ALLEGRO_KEY_I] ){
+        if(charater2_change_direction==0){
+            chara2.dir[0] = 0;
+            chara2.dir[1] = 0;
+            chara2.dir[2] = 1;
+            chara2.dir[3] = 0;
+            chara2.y -= (5+charater2_speed);
+            chara2.state = MOVE;
+        }else if(charater2_change_direction==1){
+            chara2.dir[0] = 1;
+            chara2.dir[1] = 0;
+            chara2.dir[2] = 0;
+            chara2.dir[3] = 0;
+            chara2.y += (5+charater2_speed);
+            chara2.state = MOVE;
+        }
+    }else if( key_state[ALLEGRO_KEY_J] ){
+        if(charater2_change_direction==0){
+            chara2.dir[0] = 0;
+            chara2.dir[1] = 1;
+            chara2.dir[2] = 0;
+            chara2.dir[3] = 0;
+            chara2.x -= (5+charater2_speed);
+            chara2.state = MOVE;
+        }else if(charater2_change_direction==1){
+            chara2.dir[0] = 0;
+            chara2.dir[1] = 0;
+            chara2.dir[2] = 0;
+            chara2.dir[3] = 1;
+            chara2.x += (5+charater2_speed);
+            chara2.state = MOVE;
+        }
+    }else if( key_state[ALLEGRO_KEY_K] ){
+        if(charater2_change_direction==0){
+            chara2.dir[0] = 1;
+            chara2.dir[1] = 0;
+            chara2.dir[2] = 0;
+            chara2.dir[3] = 0;
+            chara2.y += (5+charater2_speed);
+            chara2.state = MOVE;
+        }else if(charater2_change_direction==1){
+            chara2.dir[0] = 0;
+            chara2.dir[1] = 0;
+            chara2.dir[2] = 1;
+            chara2.dir[3] = 0;
+            chara2.y -= (5+charater2_speed);
+            chara2.state = MOVE;
+        }
+    }else if( key_state[ALLEGRO_KEY_L] ){
+        if(charater2_change_direction==0){
+            chara2.dir[0] = 0;
+            chara2.dir[1] = 0;
+            chara2.dir[2] = 0;
+            chara2.dir[3] = 1;
+            chara2.x += (5+charater2_speed);
+            chara2.state = MOVE;
+        }else if(charater2_change_direction==1){
+            chara2.dir[0] = 0;
+            chara2.dir[1] = 1;
+            chara2.dir[2] = 0;
+            chara2.dir[3] = 0;
+            chara2.x -= (5+charater2_speed);
+            chara2.state = MOVE;
+        }
+    }else if( chara2.anime == chara2.anime_time-1 ){
+        chara2.anime = 0;
+        chara2.state = STOP;
+    }else if ( chara2.anime == 0 ){
+        chara2.state = STOP;
+    }
+    //elapsed_time = 61 - (al_get_time() - ts);               //add
+    //game_time = (int)elapsed_time;                          //add
+    sprintf(charater2_score_string,"(2) score = %2d", ch2_score);             //add
+    //sprintf(time_string,"time = %2d", game_time);           //add
+    if(game_time == 0 && score >= 60){
+        judge_next_window =1;
+        window = 5;
+    }
+     if(game_time == 0 && score < 60) {
+        judge_next_window =1;
+        window = 6;
+    }
+
+}
+void character2_draw(){
+    // with the state, draw corresponding image
+    if( chara2.state == STOP ){
+        if( chara2.dir[0]==1 &&  chara2.dir[1]==0 && chara2.dir[2]==0 && chara2.dir[3]==0)
+            al_draw_bitmap(chara2.img_move[0], chara2.x, chara2.y, 0);
+        else if( chara2.dir[0]==0 &&  chara2.dir[1]==1 && chara2.dir[2]==0 && chara2.dir[3]==0)
+            al_draw_bitmap(chara2.img_move[2], chara2.x, chara2.y, 0);
+        else if( chara2.dir[0]==0 &&  chara2.dir[1]==0 && chara2.dir[2]==1 && chara2.dir[3]==0)
+            al_draw_bitmap(chara2.img_move[4], chara2.x, chara2.y, 0);
+        else if( chara2.dir[0]==0 &&  chara2.dir[1]==0 && chara2.dir[2]==0 && chara2.dir[3]==1)
+            al_draw_bitmap(chara2.img_move[6], chara2.x, chara2.y, 0);
+
+    }else if( chara2.state == MOVE ){
+        if( chara2.dir[0]==1 &&  chara2.dir[1]==0 && chara2.dir[2]==0 && chara2.dir[3]==0 ){
+            if( chara2.anime < chara2.anime_time/2 ){
+                al_draw_bitmap(chara2.img_move[0], chara2.x, chara2.y, 0);
+            }else{
+                al_draw_bitmap(chara2.img_move[1], chara2.x, chara2.y, 0);
+            }
+        }else if( chara2.dir[0]==0 &&  chara2.dir[1]==1 && chara2.dir[2]==0 && chara2.dir[3]==0 ){
+            if( chara2.anime < chara2.anime_time/2 ){
+                al_draw_bitmap(chara2.img_move[2], chara2.x, chara2.y, 0);
+            }else{
+                al_draw_bitmap(chara2.img_move[3], chara2.x, chara2.y, 0);
+            }
+        }else if( chara2.dir[0]==0 &&  chara2.dir[1]==0 && chara2.dir[2]==1 && chara2.dir[3]==0 ){
+            if( chara2.anime < chara2.anime_time/2 ){
+                al_draw_bitmap(chara2.img_move[4], chara2.x, chara2.y, 0);
+            }else{
+                al_draw_bitmap(chara2.img_move[5], chara2.x, chara2.y, 0);
+            }
+        }else if( chara2.dir[0]==0 &&  chara2.dir[1]==0 && chara2.dir[2]==0 && chara2.dir[3]==1 ){
+            if( chara2.anime < chara2.anime_time/2 ){
+                al_draw_bitmap(chara2.img_move[6], chara2.x, chara2.y, 0);
+            }else{
+                al_draw_bitmap(chara2.img_move[7], chara2.x, chara2.y, 0);
+            }
+        }
+    }
+}
+void character2_destory(){
+    al_destroy_bitmap(chara2.img_move[0]);
+    al_destroy_bitmap(chara2.img_move[1]);
+    al_destroy_bitmap(chara2.img_move[2]);
+    al_destroy_bitmap(chara2.img_move[3]);
+    al_destroy_bitmap(chara2.img_move[4]);
+    al_destroy_bitmap(chara2.img_move[5]);
+    al_destroy_bitmap(chara2.img_move[6]);
+    al_destroy_bitmap(chara2.img_move[7]);
+}
 
 
 ////////////////////////////////////////////////////////////////doc1
@@ -244,6 +426,20 @@ void doc1_process(){
             score+=5;
         }
         printf("%d\n",score);
+        doc1.state=getdoc;
+    }
+    if(doc1.x-67 <= chara2.x && chara2.x <= doc1.x+48 && doc1.y-100 <= chara2.y && chara2.y <= doc1.y+48){
+
+        al_set_sample_instance_playmode(get_doc1_sound, ALLEGRO_PLAYMODE_ONCE);
+        al_attach_sample_instance_to_mixer(get_doc1_sound, al_get_default_mixer());
+        al_set_sample_instance_gain(get_doc1_sound, 10);
+        al_play_sample_instance(get_doc1_sound);
+        ch2_score+=5;
+        if(changecolor==1)
+        {
+            ch2_score+=5;
+        }
+        printf("(2)%d\n",ch2_score);
         doc1.state=getdoc;
     }
 }
@@ -307,6 +503,18 @@ void doc2_process(){
             score+=10;
         }
         printf("%d\n",score);
+        doc2.state=getdoc;
+    }
+    if(doc2.x-67 <= chara2.x && chara2.x <= doc2.x+48 && doc2.y-100 <= chara2.y && chara2.y <= doc2.y+48){
+
+        al_set_sample_instance_playmode(get_doc2_sound, ALLEGRO_PLAYMODE_ONCE);
+        al_attach_sample_instance_to_mixer(get_doc2_sound, al_get_default_mixer());
+        al_set_sample_instance_gain(get_doc2_sound, 10);
+        al_play_sample_instance(get_doc2_sound);
+        if(changecolor==1){
+            ch2_score+=10;
+        }
+        printf("(2)%d\n",ch2_score);
         doc2.state=getdoc;
     }
 }
@@ -376,6 +584,18 @@ void doc3_process(){
                  score+=10;
             }
             printf("%d\n",score);
+            doc3.state=getdoc;
+    }
+    if(doc3.x-67 <= chara2.x && chara2.x <= doc3.x+48 && doc3.y-100 <= chara2.y && chara2.y <= doc3.y+48){
+
+            al_set_sample_instance_playmode(get_doc3_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_doc3_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_doc3_sound, 10);
+            al_play_sample_instance(get_doc3_sound);
+            if(changecolor==1){
+                 ch2_score+=10;
+            }
+            printf("(2)%d\n",ch2_score);
             doc3.state=getdoc;
     }
 }
@@ -454,6 +674,19 @@ void cof_process(){
             }
             printf("speed = %d\n", speed);
     }
+    if(cof.x-67 <= chara2.x && chara2.x <= cof.x+48 && cof.y-100 <= chara2.y && chara2.y <= cof.y+48){
+
+            al_set_sample_instance_playmode(get_cof_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_cof_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_cof_sound, 8);
+            al_play_sample_instance(get_cof_sound);
+            printf("get cof boost\n");
+            cof.state=getcof;
+            if(5+charater2_speed<9){
+                charater2_speed+=2;
+            }
+            printf("(2)speed = %d\n", charater2_speed);
+    }
 }
 
 int cof_count;
@@ -526,6 +759,19 @@ void beer_process(){
                 speed-=2;
             }
             printf("speed = %d\n", speed);
+    }
+     if(beer.x-67<= chara2.x && chara2.x <= beer.x+48 && beer.y-100 <= chara2.y && chara2.y <= beer.y+48){
+
+            al_set_sample_instance_playmode(get_beer_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_beer_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_beer_sound, 8);
+            al_play_sample_instance(get_beer_sound);
+            printf("get beer debuff\n");
+            beer.state=getbeer;
+            if(5+charater2_speed>1){
+                charater2_speed-=2;
+            }
+            printf("(2)speed = %d\n", charater2_speed);
     }
 }
 
@@ -657,6 +903,75 @@ void pills_process(){
                 change_direction =false;
             }
     }
+    if( chara2.dir[1] ==1 && pills.x <= chara2.x && chara2.x <= pills.x+48 && pills.y-100 <= chara2.y && chara2.y <= pills.y+48){
+
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 5);
+            al_play_sample_instance(get_pills_sound);
+
+            pills.state=getpills;
+            printf("(2)get pills debuff\n");
+
+            chara2.x+=5;
+
+            if(charater2_change_direction==false){
+                charater2_change_direction =true;
+            }else{
+                charater2_change_direction =false;
+            }
+    //charater dir is right and collide with pill from left side
+    }else if(chara2.dir[3] ==1 && pills.x-67 <= chara2.x && chara2.x <= pills.x && pills.y-100 <= chara2.y && chara2.y <= pills.y+48){
+
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 5);
+            al_play_sample_instance(get_pills_sound);
+
+            pills.state=getpills;
+            printf("(2)get pills debuff\n");
+
+            chara2.x-=5;
+            if(charater2_change_direction==false){
+                charater2_change_direction =true;
+            }else{
+                charater2_change_direction =false;
+            }
+    //charater dir is down and collide with pill from top side
+    }else if(chara2.dir[0] ==1 && pills.y-100 <= chara2.y && chara2.y <= pills.y && pills.x-67 <= chara2.x && chara2.x <= pills.x+48){
+
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 5);
+            al_play_sample_instance(get_pills_sound);
+
+            pills.state=getpills;
+            printf("(2)get pills debuff\n");
+
+            chara2.y-=5;
+            if(charater2_change_direction==false){
+                charater2_change_direction =true;
+            }else{
+                charater2_change_direction =false;
+            }
+    //charater dir is up and collide with pill from bottom side
+    }else if(chara2.dir[2] ==1 && pills.y <= chara2.y && chara2.y <= pills.y+48 && pills.x-67 <= chara2.x && chara2.x <= pills.x+48){
+
+            al_set_sample_instance_playmode(get_pills_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_pills_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_pills_sound, 5);
+            al_play_sample_instance(get_pills_sound);
+
+            pills.state=getpills;
+            printf("(2)get pills debuff\n");
+
+            chara2.y+=5;
+            if(charater2_change_direction==false){
+                charater2_change_direction =true;
+            }else{
+                charater2_change_direction =false;
+            }
+    }
 }
 
 int pills_count;
@@ -723,6 +1038,16 @@ void past_exam_process(){
             al_set_sample_instance_gain(get_past_exam_sound, 5);
             al_play_sample_instance(get_past_exam_sound);
             printf("get past exam buff\n");
+            past_exam.state=getpast_exam;
+
+    }
+    if(past_exam.x-67<= chara2.x && chara2.x <= past_exam.x+48 && past_exam.y-100 <= chara2.y && chara2.y <= past_exam.y+48){
+
+            al_set_sample_instance_playmode(get_past_exam_sound, ALLEGRO_PLAYMODE_ONCE);
+            al_attach_sample_instance_to_mixer(get_past_exam_sound, al_get_default_mixer());
+            al_set_sample_instance_gain(get_past_exam_sound, 5);
+            al_play_sample_instance(get_past_exam_sound);
+            printf("(2)get past exam buff\n");
             past_exam.state=getpast_exam;
 
     }

@@ -6,6 +6,12 @@ void charater_update();
 void character_draw();
 void character_destory();
 
+void character2_init();
+void charater2_process(ALLEGRO_EVENT event);
+void charater2_update();
+void character2_draw();
+void character2_destory();
+
 void doc1_init();
 void doc1_process();
 void doc1_update();

@@ -20,13 +20,17 @@ extern bool judge_next_window;
 extern ALLEGRO_EVENT_QUEUE *event_queue;
 extern ALLEGRO_TIMER *fps;
 extern int score;               //add
+extern int ch2_score;
 extern char score_string[50];   //add
+extern char charater2_score_string[50];
 extern double ts;               //add
 extern double elapsed_time;     //add
 extern int game_time;           //add
 extern char time_string[50];    //add
 extern int speed;               //add
+extern int charater2_speed;
 extern bool change_direction;   //add
+extern bool charater2_change_direction;
 extern int changecolor;         //add
 extern int window;              //add
 extern int select_character;    //add

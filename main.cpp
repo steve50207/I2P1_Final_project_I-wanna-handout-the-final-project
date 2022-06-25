@@ -74,6 +74,7 @@ void destroy_video(){
 
 
 int main(){
+    /*
     srand(time(0));
 
     init_video();
@@ -90,6 +91,6 @@ int main(){
         }
     }
     destroy_video();
-
+    */
     Game_establish();
 }

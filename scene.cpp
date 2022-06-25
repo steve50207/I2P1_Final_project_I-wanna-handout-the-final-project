@@ -214,9 +214,9 @@ void game_scene_init()
     pills_init();
     past_exam_init();
     background = al_load_bitmap("./image/scene/gaming_1.png");
-    charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);            //add
-    charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);             //add
-    charater2_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 50, 0);
+    charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);            //add
+    charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);             //add
+    charater2_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);
 
     game_scene_sample = al_load_sample("./sound/game_bgm.wav");
     game_scene_sound = al_create_sample_instance(game_scene_sample);
@@ -239,8 +239,8 @@ void game_scene_draw()
     character_draw();
     character2_draw();
     al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
-    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 935, 10, 0, time_string);          //add
-    al_draw_text(charater2_score, al_map_rgb(0, 0, 0), 35, 40, 0, charater2_score_string);
+    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 500, 10, 0, time_string);          //add
+    al_draw_text(charater2_score, al_map_rgb(0, 0, 0), 935, 10, 0, charater2_score_string);
 }
 
 void game_scene_destroy()

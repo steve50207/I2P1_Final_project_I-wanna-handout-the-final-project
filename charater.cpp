@@ -13,6 +13,7 @@ typedef struct character
     int anime_time; // indicate how long the animation
 }Character;
 Character chara;
+Character chara2;
 
 ALLEGRO_SAMPLE *sample = NULL;
 void character_init(){
@@ -40,7 +41,7 @@ void character_init(){
 
     //initial counting component
     ts = al_get_time();                         //add
-    sprintf(score_string,"score = %2d", 0);     //add
+    sprintf(score_string,"P1 score : %2d", 0);     //add
     sprintf(time_string,"time = %2d", 61);      //add
 
 }
@@ -131,9 +132,25 @@ void charater_update(){
     }else if ( chara.anime == 0 ){
         chara.state = STOP;
     }
+
+    if((chara2.x-40<=chara.x&&chara.x<=chara2.x+40)&&(chara2.y-90<=chara.y&&chara.y<=chara2.y+85)){
+         if(chara.x>chara2.x){
+            chara.x=chara.x+5;
+        }
+        if(chara.x<chara2.x){
+            chara.x=chara.x-5;
+        }
+        if(chara.y>chara2.y){
+            chara.y=chara.y+5;
+        }
+        if(chara.y<chara2.y){
+            chara.y=chara.y-5;
+        }
+    }
+
     elapsed_time = 61 - (al_get_time() - ts);               //add
     game_time = (int)elapsed_time;                          //add
-    sprintf(score_string,"score = %2d", score);             //add
+    sprintf(score_string,"P1 score : %2d", score);             //add
     sprintf(time_string,"time = %2d", game_time);           //add
     if(game_time == 0 && score >= 60){
         judge_next_window =1;
@@ -197,7 +214,7 @@ void character_destory(){
 }
 ////////////////////////////////////////////////////////////////chara2
 
-Character chara2;
+
 ALLEGRO_SAMPLE *sample2 = NULL;
 void character2_init(){
     // load character images
@@ -224,7 +241,7 @@ void character2_init(){
 
     //initial counting component
     ts = al_get_time();                         //add
-    sprintf(charater2_score_string,"(2) score = %2d", 0);     //add
+    sprintf(charater2_score_string,"P2 score : %2d", 0);     //add
     //sprintf(time_string,"(2) time = %2d", 61);      //add
 
 }
@@ -317,7 +334,7 @@ void charater2_update(){
     }
     //elapsed_time = 61 - (al_get_time() - ts);               //add
     //game_time = (int)elapsed_time;                          //add
-    sprintf(charater2_score_string,"(2) score = %2d", ch2_score);             //add
+    sprintf(charater2_score_string,"P2 score : %2d", ch2_score);             //add
     //sprintf(time_string,"time = %2d", game_time);           //add
     if(game_time == 0 && score >= 60){
         judge_next_window =1;
@@ -326,6 +343,20 @@ void charater2_update(){
      if(game_time == 0 && score < 60) {
         judge_next_window =1;
         window = 6;
+    }
+    if((chara.x-40<=chara2.x&&chara2.x<=chara.x+40)&&(chara.y-90<=chara2.y&&chara2.y<=chara.y+85)){
+        if(chara2.x>chara.x){
+            chara2.x=chara2.x+5;
+        }
+        if(chara2.x<chara.x){
+            chara2.x=chara2.x-5;
+        }
+        if(chara2.y>chara.y){
+            chara2.y=chara2.y+5;
+        }
+        if(chara2.y<chara.y){
+            chara2.y=chara2.y-5;
+        }
     }
 
 }
@@ -425,7 +456,7 @@ void doc1_process(){
         {
             score+=5;
         }
-        printf("%d\n",score);
+        printf("P1 %d\n",score);
         doc1.state=getdoc;
     }
     if(doc1.x-67 <= chara2.x && chara2.x <= doc1.x+48 && doc1.y-100 <= chara2.y && chara2.y <= doc1.y+48){
@@ -439,7 +470,7 @@ void doc1_process(){
         {
             ch2_score+=5;
         }
-        printf("(2)%d\n",ch2_score);
+        printf("P2 %d\n",ch2_score);
         doc1.state=getdoc;
     }
 }
@@ -502,7 +533,7 @@ void doc2_process(){
         if(changecolor==1){
             score+=10;
         }
-        printf("%d\n",score);
+        printf("P1 %d\n",score);
         doc2.state=getdoc;
     }
     if(doc2.x-67 <= chara2.x && chara2.x <= doc2.x+48 && doc2.y-100 <= chara2.y && chara2.y <= doc2.y+48){
@@ -514,7 +545,7 @@ void doc2_process(){
         if(changecolor==1){
             ch2_score+=10;
         }
-        printf("(2)%d\n",ch2_score);
+        printf("P2 %d\n",ch2_score);
         doc2.state=getdoc;
     }
 }
@@ -583,7 +614,7 @@ void doc3_process(){
             if(changecolor==1){
                  score+=10;
             }
-            printf("%d\n",score);
+            printf("P1 %d\n",score);
             doc3.state=getdoc;
     }
     if(doc3.x-67 <= chara2.x && chara2.x <= doc3.x+48 && doc3.y-100 <= chara2.y && chara2.y <= doc3.y+48){
@@ -595,7 +626,7 @@ void doc3_process(){
             if(changecolor==1){
                  ch2_score+=10;
             }
-            printf("(2)%d\n",ch2_score);
+            printf("P2 %d\n",ch2_score);
             doc3.state=getdoc;
     }
 }
@@ -658,6 +689,8 @@ void cof_init(){
     cof.state = notgetcof;
 }
 
+int chara1_cof_duration;
+int chara2_cof_duration;
 
 void cof_process(){
 
@@ -667,12 +700,12 @@ void cof_process(){
             al_attach_sample_instance_to_mixer(get_cof_sound, al_get_default_mixer());
             al_set_sample_instance_gain(get_cof_sound, 8);
             al_play_sample_instance(get_cof_sound);
-            printf("get cof boost\n");
+            printf("P1 get cof boost\n");
             cof.state=getcof;
             if(5+speed<9){
                 speed+=2;
             }
-            printf("speed = %d\n", speed);
+            printf("P1 speed = %d\n", speed);
     }
     if(cof.x-67 <= chara2.x && chara2.x <= cof.x+48 && cof.y-100 <= chara2.y && chara2.y <= cof.y+48){
 
@@ -680,14 +713,15 @@ void cof_process(){
             al_attach_sample_instance_to_mixer(get_cof_sound, al_get_default_mixer());
             al_set_sample_instance_gain(get_cof_sound, 8);
             al_play_sample_instance(get_cof_sound);
-            printf("get cof boost\n");
+            printf("P2 get cof boost\n");
             cof.state=getcof;
             if(5+charater2_speed<9){
                 charater2_speed+=2;
             }
-            printf("(2)speed = %d\n", charater2_speed);
+            printf("P2 speed = %d\n", charater2_speed);
     }
 }
+
 
 int cof_count;
 int cof_closed;
@@ -753,12 +787,12 @@ void beer_process(){
             al_attach_sample_instance_to_mixer(get_beer_sound, al_get_default_mixer());
             al_set_sample_instance_gain(get_beer_sound, 8);
             al_play_sample_instance(get_beer_sound);
-            printf("get beer debuff\n");
+            printf("P2 get beer debuff\n");
             beer.state=getbeer;
             if(5+speed>1){
                 speed-=2;
             }
-            printf("speed = %d\n", speed);
+            printf("P1 speed = %d\n", speed);
     }
      if(beer.x-67<= chara2.x && chara2.x <= beer.x+48 && beer.y-100 <= chara2.y && chara2.y <= beer.y+48){
 
@@ -766,12 +800,12 @@ void beer_process(){
             al_attach_sample_instance_to_mixer(get_beer_sound, al_get_default_mixer());
             al_set_sample_instance_gain(get_beer_sound, 8);
             al_play_sample_instance(get_beer_sound);
-            printf("get beer debuff\n");
+            printf("P2 get beer debuff\n");
             beer.state=getbeer;
             if(5+charater2_speed>1){
                 charater2_speed-=2;
             }
-            printf("(2)speed = %d\n", charater2_speed);
+            printf("P2 speed = %d\n", charater2_speed);
     }
 }
 
@@ -842,7 +876,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("get pills debuff\n");
+            printf("P1 get pills debuff\n");
 
             chara.x+=5;
 
@@ -860,7 +894,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("get pills debuff\n");
+            printf("P1 get pills debuff\n");
 
             chara.x-=5;
             if(change_direction==false){
@@ -877,7 +911,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("get pills debuff\n");
+            printf("P1 get pills debuff\n");
 
             chara.y-=5;
             if(change_direction==false){
@@ -894,7 +928,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("get pills debuff\n");
+            printf("P1 get pills debuff\n");
 
             chara.y+=5;
             if(change_direction==false){
@@ -911,7 +945,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("(2)get pills debuff\n");
+            printf("P2 get pills debuff\n");
 
             chara2.x+=5;
 
@@ -929,7 +963,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("(2)get pills debuff\n");
+            printf("P2 get pills debuff\n");
 
             chara2.x-=5;
             if(charater2_change_direction==false){
@@ -946,7 +980,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("(2)get pills debuff\n");
+            printf("P2 get pills debuff\n");
 
             chara2.y-=5;
             if(charater2_change_direction==false){
@@ -963,7 +997,7 @@ void pills_process(){
             al_play_sample_instance(get_pills_sound);
 
             pills.state=getpills;
-            printf("(2)get pills debuff\n");
+            printf("P2 get pills debuff\n");
 
             chara2.y+=5;
             if(charater2_change_direction==false){

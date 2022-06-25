@@ -689,8 +689,6 @@ void cof_init(){
     cof.state = notgetcof;
 }
 
-int chara1_cof_duration;
-int chara2_cof_duration;
 
 void cof_process(){
 
@@ -722,11 +720,28 @@ void cof_process(){
     }
 }
 
-
+int charater1_cof_duration;
+int charater2_cof_duration;
 int cof_count;
 int cof_closed;
 void cof_update(){
     cof_count++;
+    if(speed>0){
+        charater1_cof_duration++;
+        printf("ch1_cof _du %3d\n",charater1_cof_duration);
+        if(charater1_cof_duration==600){
+            speed=0;
+            charater1_cof_duration=0;
+        }
+    }
+    if(charater2_speed>0){
+        charater2_cof_duration++;
+        printf("ch2_cof _du %3d\n",charater2_cof_duration);
+        if(charater2_cof_duration==600){
+            charater2_speed=0;
+            charater2_cof_duration=0;
+        }
+    }
     if( cof.state == getcof||cof_count==1500||cof_count==3300){
         cof_closed=1;
         cof_init();
@@ -809,10 +824,28 @@ void beer_process(){
     }
 }
 
+int charater1_beer_duration;
+int charater2_beer_duration;
 int beer_count;
 int beer_closed;
 void beer_update(){
     beer_count++;
+    if(speed<0){
+        charater1_beer_duration++;
+        printf("ch1_beer_dur %3d\n",charater1_beer_duration);
+        if(charater1_beer_duration==600){
+            speed=0;
+            charater1_beer_duration=0;
+        }
+    }
+    if(charater2_speed<0){
+        charater2_beer_duration++;
+        printf("ch2_beer_dur %3d\n",charater2_beer_duration);
+        if(charater2_beer_duration==600){
+            charater2_speed=0;
+            charater2_beer_duration=0;
+        }
+    }
     if( beer.state == getbeer||beer_count==600||beer_count==2400){
         beer_closed=1;
         beer_init();
@@ -1008,10 +1041,28 @@ void pills_process(){
     }
 }
 
+int charater1_pills_duration;
+int charater2_pills_duration;
 int pills_count;
 int pills_closed;
 void pills_update(){
     pills_count++;
+    if(change_direction==true){
+        charater1_pills_duration++;
+        printf("ch1_pills_dur %3d\n",charater1_pills_duration);
+        if(charater1_pills_duration==600){
+            change_direction=false;
+            charater1_pills_duration=0;
+        }
+    }
+    if(charater2_change_direction==true){
+        charater2_pills_duration++;
+        printf("ch2_pills_dur %3d\n",charater2_pills_duration);
+        if(charater2_pills_duration==600){
+            charater2_change_direction=false;
+            charater2_pills_duration=0;
+        }
+    }
     if( pills.state == getpills||pills_count==1200||pills_count==3000){
         pills_closed=1;
         pills_init();

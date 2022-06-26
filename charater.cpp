@@ -28,7 +28,7 @@ void character_init(){
     chara.width = al_get_bitmap_width(chara.img_move[0]);
     chara.height = al_get_bitmap_height(chara.img_move[0]);
     chara.x = (int)rand()%1000;
-    chara.y = (int)rand()%700+100;
+    chara.y = 220+(int)rand()%650;
     chara.dir[0] = 1;
     chara.dir[1] = 0;
     chara.dir[2] = 0;
@@ -148,6 +148,42 @@ void charater_update(){
         }
     }
 
+    if(-10<=chara.x&&chara.x<355||550<=chara.x&&chara.x<790||900<=chara.x&&chara.x<=1200){
+        if(chara.y<=170){
+            chara.y=chara.y+5;
+        }
+        else{
+            chara.y=chara.y;
+        }
+    }
+    if(435<=chara.x&&chara.x<550||790<=chara.x&&chara.x<900){
+        if(chara.y<=100){
+            chara.y=chara.y+5;
+        }
+        else{
+            chara.y=chara.y;
+        }
+    }
+    if(355<=chara.x&&chara.x<435){
+         if(chara.y<=140){
+            chara.y=chara.y+5;
+        }
+        else{
+            chara.y=chara.y;
+        }
+    }
+    if(chara.x<=-10||chara.x>=1150){
+         if(chara.x<=-10){
+            chara.x=chara.x+5;
+        }
+        else{
+            chara.x=chara.x-5;
+        }
+    }
+    if(chara.y>=810){
+        chara.y=chara.y-5;
+    }
+
     elapsed_time = 61 - (al_get_time() - ts);               //add
     game_time = (int)elapsed_time;                          //add
     sprintf(score_string,"P1 score : %2d", score);             //add
@@ -228,7 +264,7 @@ void character2_init(){
     chara2.width = al_get_bitmap_width(chara2.img_move[0]);
     chara2.height = al_get_bitmap_height(chara2.img_move[0]);
     chara2.x = (int)rand()%1000;
-    chara2.y = (int)rand()%700+100;
+    chara2.y = 220+(int)rand()%650;
     chara2.dir[0] = 1;
     chara2.dir[1] = 0;
     chara2.dir[2] = 0;
@@ -359,6 +395,42 @@ void charater2_update(){
         }
     }
 
+        if(-10<=chara2.x&&chara2.x<355||550<=chara2.x&&chara2.x<790||900<=chara2.x&&chara2.x<=1200){
+        if(chara2.y<=170){
+            chara2.y=chara2.y+5;
+        }
+        else{
+            chara2.y=chara2.y;
+        }
+    }
+    if(435<=chara2.x&&chara2.x<550||790<=chara2.x&&chara2.x<900){
+        if(chara2.y<=100){
+            chara2.y=chara2.y+5;
+        }
+        else{
+            chara2.y=chara2.y;
+        }
+    }
+    if(355<=chara2.x&&chara2.x<435){
+         if(chara2.y<=140){
+            chara2.y=chara2.y+5;
+        }
+        else{
+            chara2.y=chara2.y;
+        }
+    }
+    if(chara2.x<=-10||chara2.x>=1150){
+         if(chara2.x<=-10){
+            chara2.x=chara2.x+5;
+        }
+        else{
+            chara2.x=chara2.x-5;
+        }
+    }
+    if(chara2.y>=810){
+        chara2.y=chara2.y-5;
+    }
+
 }
 void character2_draw(){
     // with the state, draw corresponding image
@@ -434,7 +506,7 @@ void doc1_init(){
     doc1.width = al_get_bitmap_width(doc1.img_doc);
     doc1.height = al_get_bitmap_height(doc1.img_doc);
     doc1.x = (int)rand()%1000;
-    doc1.y = (int)rand()%700+100;
+    doc1.y = 220+(int)rand()%650;
     // load effective sound
     get_doc1_sample = al_load_sample("./sound/picking_file.wav");
     get_doc1_sound  = al_create_sample_instance(get_doc1_sample);
@@ -513,7 +585,7 @@ void doc2_init(){
     doc2.width = al_get_bitmap_width(doc2.img_doc);
     doc2.height = al_get_bitmap_height(doc2.img_doc);
     doc2.x = (int)rand()%1000;
-    doc2.y = (int)rand()%700+100;
+    doc2.y = 220+(int)rand()%650;
     // load effective sound
     get_doc2_sample = al_load_sample("./sound/picking_file.wav");
     get_doc2_sound  = al_create_sample_instance(get_doc2_sample);
@@ -594,7 +666,7 @@ void doc3_init(){
     doc3.width = al_get_bitmap_width(doc3.img_doc);
     doc3.height = al_get_bitmap_height(doc3.img_doc);
     doc3.x = (int)rand()%1000;
-    doc3.y = (int)rand()%700+100;
+    doc3.y = 220+(int)rand()%650;
     // load effective sound
     get_doc3_sample = al_load_sample("./sound/picking_file.wav");
     get_doc3_sound  = al_create_sample_instance(get_doc3_sample);
@@ -681,7 +753,7 @@ void cof_init(){
     cof.width = al_get_bitmap_width(cof.img_cof);
     cof.height = al_get_bitmap_height(cof.img_cof);
     cof.x = (int)rand()%1000;
-    cof.y = (int)rand()%700+100;
+    cof.y = 220+(int)rand()%650;
     // load effective sound
     get_cof_sample = al_load_sample("./sound/drinking_coffee.wav");
     get_cof_sound  = al_create_sample_instance(get_cof_sample);
@@ -785,7 +857,7 @@ void beer_init(){
     beer.width = al_get_bitmap_width(beer.img_beer);
     beer.height = al_get_bitmap_height(beer.img_beer);
     beer.x = (int)rand()%1000;
-    beer.y = (int)rand()%700+100;
+    beer.y = 220+(int)rand()%650;
     // load effective sound
     get_beer_sample = al_load_sample("./sound/drinking_alcohol.wav");
     get_beer_sound  = al_create_sample_instance(get_beer_sample);
@@ -889,7 +961,7 @@ void pills_init(){
     pills.width = al_get_bitmap_width(pills.img_pills);
     pills.height = al_get_bitmap_height(pills.img_pills);
     pills.x = (int)rand()%1000;
-    pills.y = (int)rand()%700+100;
+    pills.y = 220+(int)rand()%650;
     // load effective sound
     get_pills_sample = al_load_sample("./sound/taking_pills.wav");
     get_pills_sound  = al_create_sample_instance(get_pills_sample);
@@ -1105,7 +1177,7 @@ void past_exam_init(){
     past_exam.width = al_get_bitmap_width(past_exam.img_past_exam);
     past_exam.height = al_get_bitmap_height(past_exam.img_past_exam);
     past_exam.x = (int)rand()%1000;
-    past_exam.y = (int)rand()%700+100;
+    past_exam.y = 220+(int)rand()%650;
     // load effective sound
     get_past_exam_sample = al_load_sample("./sound/picking_past_exam.wav");
     get_past_exam_sound  = al_create_sample_instance(get_past_exam_sample);

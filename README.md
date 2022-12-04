@@ -12,8 +12,8 @@
 
 ## How to control
 - Need to change IME setting to English  .
-- Use keyboard WASD to controller the charater1.
-- Use keyboard IJKL to controller the charater2.
+- Use keyboard WASD to control charater1.
+- Use keyboard IJKL to control charater2.
 
 ## Credit
 - This project is made by Grace and YenTing and Steve.

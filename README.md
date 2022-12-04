@@ -10,17 +10,14 @@
 - Collect the documents to get 60 scores in one minute.
 - Take advantage of buff and debuff to get higher scores.
 
-## How to controll
+## How to control
 - Need to change IME setting to English  .
-- Use keyboard WASD to controller the charater.
+- Use keyboard WASD to controller the charater1.
+- Use keyboard IJKL to controller the charater2.
 
 ## Credit
 - This project is made by Grace and YenTing and Steve.
 - Apperciate their effort for the final project!
-
-## Future Development Direction
-- Modify buff and debuff show up frequency.
-- Add 2P Character so that it may have PVP mode.
 
 ## Reference Resource
 

@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="allegro/include" />
 				</Compiler>
 				<Linker>
 					<Add library="allegro/lib/liballegro_monolith-debug.dll.a" />
@@ -26,6 +27,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c99" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

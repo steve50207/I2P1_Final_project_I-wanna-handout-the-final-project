@@ -7,7 +7,7 @@
 - Execute the I wanna handout the final project!.exe and start to play.
 
 ## Game Target
-- Collect the documents to get 60 scores in one minute.
+- Both charactors collect the documents to get 60 scores individually in one minute.
 - Take advantage of buff and debuff to get higher scores.
 
 ## How to control

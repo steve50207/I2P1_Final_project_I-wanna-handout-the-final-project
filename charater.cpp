@@ -1,16 +1,16 @@
 #include "charater.h"
 
-// the state of character
+// the state of all charactor
 enum {STOP = 0, MOVE, getdoc, notgetdoc, getcof, notgetcof, getbeer, notgetbeer, getpills, notgetpills, getpast_exam, notgetpast_exam};
 typedef struct character
 {
-    int x, y; // the position of image
-    int width, height; // the width and height of image
-    int dir[4]; // down: 0, left: 1, up: 2, right: 3
-    int state; // the state of character
+    int x, y;           // the position of image
+    int width, height;  // the width and height of image
+    int dir[4];         // down: 0, left: 1, up: 2, right: 3
+    int state;          // the state of character
     ALLEGRO_BITMAP *img_move[8];
-    int anime; // counting the time of animation
-    int anime_time; // indicate how long the animation
+    int anime;          // counting the time of animation
+    int anime_time;     // indicate how long the animation
 }Character;
 Character chara;
 Character chara2;
@@ -40,9 +40,9 @@ void character_init(){
     chara.anime_time = 30;
 
     //initial counting component
-    ts = al_get_time();                         //add
-    sprintf(score_string,"P1 score : %2d", 0);     //add
-    sprintf(time_string,"time = %2d", 61);      //add
+    ts = al_get_time();
+    sprintf(score_string,"P1 score : %2d", 0);
+    sprintf(time_string,"time = %2d", 61);
 
 }
 void charater_process(ALLEGRO_EVENT event){
@@ -52,6 +52,7 @@ void charater_process(ALLEGRO_EVENT event){
             chara.anime++;
             chara.anime %= chara.anime_time;
         }
+
     // process the keyboard event
     }else if( event.type == ALLEGRO_EVENT_KEY_DOWN ){
         key_state[event.keyboard.keycode] = true;
@@ -59,6 +60,7 @@ void charater_process(ALLEGRO_EVENT event){
     }else if( event.type == ALLEGRO_EVENT_KEY_UP ){
         key_state[event.keyboard.keycode] = false;
     }
+
 }
 void charater_update(){
     // use the idea of finite state machine to deal with different state
@@ -184,10 +186,10 @@ void charater_update(){
         chara.y=chara.y-5;
     }
 
-    elapsed_time = 61 - (al_get_time() - ts);               //add
-    game_time = (int)elapsed_time;                          //add
-    sprintf(score_string,"P1 score : %2d", score);             //add
-    sprintf(time_string,"time = %2d", game_time);           //add
+    elapsed_time = 61 - (al_get_time() - ts);
+    game_time = (int)elapsed_time;
+    sprintf(score_string,"P1 score : %2d", score);
+    sprintf(time_string,"time = %2d", game_time);
     if(game_time == 0 && score >= 60){
         judge_next_window =1;
         window = 5;
@@ -276,9 +278,8 @@ void character2_init(){
     chara2.anime_time = 30;
 
     //initial counting component
-    ts = al_get_time();                         //add
-    sprintf(charater2_score_string,"P2 score : %2d", 0);     //add
-    //sprintf(time_string,"(2) time = %2d", 61);      //add
+    ts = al_get_time();
+    sprintf(charater2_score_string,"P2 score : %2d", 0);
 
 }
 void charater2_process(ALLEGRO_EVENT event){
@@ -288,13 +289,12 @@ void charater2_process(ALLEGRO_EVENT event){
             chara2.anime++;
             chara2.anime %= chara2.anime_time;
         }
-    // process the keyboard event
-   }/*else if( event.type == ALLEGRO_EVENT_KEY_DOWN ){
+   }else if( event.type == ALLEGRO_EVENT_KEY_DOWN ){
         key_state[event.keyboard.keycode] = true;
         chara2.anime = 0;
     }else if( event.type == ALLEGRO_EVENT_KEY_UP ){
         key_state[event.keyboard.keycode] = false;
-    }*/
+    }
 }
 void charater2_update(){
     // use the idea of finite state machine to deal with different state
@@ -368,10 +368,9 @@ void charater2_update(){
     }else if ( chara2.anime == 0 ){
         chara2.state = STOP;
     }
-    //elapsed_time = 61 - (al_get_time() - ts);               //add
-    //game_time = (int)elapsed_time;                          //add
-    sprintf(charater2_score_string,"P2 score : %2d", ch2_score);             //add
-    //sprintf(time_string,"time = %2d", game_time);           //add
+
+    sprintf(charater2_score_string,"P2 score : %2d", ch2_score);
+
     if(game_time == 0 && score >= 60){
         judge_next_window =1;
         window = 5;
@@ -395,7 +394,7 @@ void charater2_update(){
         }
     }
 
-        if(-10<=chara2.x&&chara2.x<355||550<=chara2.x&&chara2.x<790||900<=chara2.x&&chara2.x<=1200){
+    if(-10<=chara2.x&&chara2.x<355||550<=chara2.x&&chara2.x<790||900<=chara2.x&&chara2.x<=1200){
         if(chara2.y<=170){
             chara2.y=chara2.y+5;
         }
@@ -558,7 +557,6 @@ void doc1_update(){
     if(doc1_count%240==0){
         doc1_closed=0;
         doc1_init();
-        //printf("%d\n",doc1_count);
     }
 }
 void doc1_draw(){
@@ -633,7 +631,6 @@ void doc2_update(){
     if(doc2_count%240==0){
         doc2_closed=0;
         doc2_init();
-        //printf("%d\n",doc2_count);
     }
 }
 
@@ -714,7 +711,6 @@ void doc3_update(){
     if(doc3_count%240==0){
         doc3_closed=0;
         doc3_init();
-        //printf("%d\n",doc3_count);
     }
 }
 void doc3_draw(){

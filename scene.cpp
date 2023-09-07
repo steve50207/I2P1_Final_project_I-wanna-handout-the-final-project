@@ -21,11 +21,11 @@ ALLEGRO_FONT *select_character_word3= NULL;
 ALLEGRO_SAMPLE *select_character_sample= NULL;
 ALLEGRO_SAMPLE_INSTANCE *select_character_sound;
 
-ALLEGRO_FONT *charater_score= NULL;         //add
+ALLEGRO_FONT *charater_score= NULL;
 ALLEGRO_FONT *charater2_score=NULL;
-ALLEGRO_FONT *charater_time= NULL;          //add
-ALLEGRO_SAMPLE *game_scene_sample= NULL;    //add
-ALLEGRO_SAMPLE_INSTANCE *game_scene_sound;  //add
+ALLEGRO_FONT *charater_time= NULL;
+ALLEGRO_SAMPLE *game_scene_sample= NULL;
+ALLEGRO_SAMPLE_INSTANCE *game_scene_sound;
 
 ALLEGRO_BITMAP *img_doc;
 ALLEGRO_BITMAP *img_cof;
@@ -149,7 +149,7 @@ void select_charater_init()
     select_character_sound = al_create_sample_instance(select_character_sample);
     al_set_sample_instance_playmode(select_character_sound, ALLEGRO_PLAYMODE_ONCE);
     al_attach_sample_instance_to_mixer(select_character_sound, al_get_default_mixer());
-    al_set_sample_instance_gain(select_character_sound, 3);
+    al_set_sample_instance_gain(select_character_sound, 2);
     al_play_sample_instance(select_character_sound);
 
 }
@@ -214,16 +214,16 @@ void game_scene_init()
     pills_init();
     past_exam_init();
     background = al_load_bitmap("./image/scene/gaming_1.png");
-    charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);            //add
-    charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);             //add
+    charater_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);
+    charater_time = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);
     charater2_score = al_load_ttf_font("./font/Montserrat-Bold.ttf", 36, 0);
 
     game_scene_sample = al_load_sample("./sound/game_bgm.wav");
     game_scene_sound = al_create_sample_instance(game_scene_sample);
-    al_set_sample_instance_playmode(game_scene_sound, ALLEGRO_PLAYMODE_LOOP);           //add
-    al_attach_sample_instance_to_mixer(game_scene_sound, al_get_default_mixer());       //add
-    al_set_sample_instance_gain(game_scene_sound, 1);                                   //add
-    al_play_sample_instance(game_scene_sound);                                          //add
+    al_set_sample_instance_playmode(game_scene_sound, ALLEGRO_PLAYMODE_LOOP);
+    al_attach_sample_instance_to_mixer(game_scene_sound, al_get_default_mixer());
+    al_set_sample_instance_gain(game_scene_sound, 1);
+    al_play_sample_instance(game_scene_sound);
 }
 
 void game_scene_draw()
@@ -238,8 +238,8 @@ void game_scene_draw()
     past_exam_draw();
     character_draw();
     character2_draw();
-    al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);         //add
-    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 500, 10, 0, time_string);          //add
+    al_draw_text(charater_score, al_map_rgb(0, 0, 0), 35, 10, 0, score_string);
+    al_draw_text(charater_time, al_map_rgb(0, 0, 0), 500, 10, 0, time_string);
     al_draw_text(charater2_score, al_map_rgb(0, 0, 0), 935, 10, 0, charater2_score_string);
 }
 
@@ -255,9 +255,9 @@ void game_scene_destroy()
     beer_destory();
     pills_destory();
     past_exam_destory();
-    al_destroy_font(charater_score);                                                    //add
-    al_destroy_font(charater_time);                                                     //add
-    al_destroy_sample_instance(game_scene_sound);                                       //add
+    al_destroy_font(charater_score);
+    al_destroy_font(charater_time);
+    al_destroy_sample_instance(game_scene_sound);
 }
 
 void win_scene_init()

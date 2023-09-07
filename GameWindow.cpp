@@ -67,9 +67,9 @@ void game_begin() {
 void game_update(){
 
     if( judge_next_window ==1 && window ==1 ){
-            // not back menu anymore, therefore destroy it
+        // not back menu anymore, therefore destroy it
         menu_destroy();
-            // initialize next scene
+        // initialize next scene
         illustration_init();
         judge_next_window = false;
         window = 2;
@@ -137,7 +137,6 @@ int process_event(){
     }else if(window == 5){
         win_scene_process(event);
         if(judge_next_window == 1)return -1;
-        //printf("process window4\n");
     }else if(window == 6){
         lose_scene_process(event);
         if(judge_next_window == 1)return -1;

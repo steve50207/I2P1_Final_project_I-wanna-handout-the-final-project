@@ -17,13 +17,13 @@
 
 ## 遊戲畫面
 - 遊戲選單
-	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_1.png)
+	- ![image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_1.png)
 - 遊戲介紹
-	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_2.png)
+	- ![image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_2.png)
 - 遊戲遊玩畫面
-	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_3.png)
+	- ![image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_3.png)
 - 遊戲結束畫面
-	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_4.png)
+	- ![image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_4.png)
 
 ## 感謝名單
 - 此項期末專題由Grace、YenTing、Steve三人協力完成，感謝他們的努力!

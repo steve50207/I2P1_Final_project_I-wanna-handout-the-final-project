@@ -1,28 +1,35 @@
 # 2022_I2P1_Final_project_Group 3
 
-## Game Name: I wanna handout the final project!
+## 遊戲名稱: I wanna handout the final project!
 
-## How to download the game
-- Download the 'I wanna handout the final project!.zip' then unzip.
-- Execute the I wanna handout the final project!.exe and start to play.
+## 如何下載遊戲
+- 下載 'I wanna handout the final project!.zip' 然後解壓縮。
+- 執行 'I wanna handout the final project!.exe' 即可進行遊玩。
 
-## Game Target
-- Both charactors collect the documents to get 60 scores individually in one minute.
-- Take advantage of buff and debuff to get higher scores.
+## 遊戲目標
+- 雙人控制兩個角色個別收集文件獲取分數，兩名腳色在60秒內皆獲得超過60分以上分數，即可通關遊戲，反之遊戲失敗。
+- 固定時間地圖上會出現增益與減益道具，善用增益道具獲取更高分數。
 
-## How to control
-- Need to change IME setting to English  .
-- Use keyboard WASD to control charater1.
-- Use keyboard IJKL to control charater2.
+## 如何控制
+- 需要切換輸入法至英文。
+- 使用鍵盤WASD控制角色1。
+- 使用鍵盤IJKL控制角色2。。
 
-## Credit
-- This project is made by Grace and YenTing and Steve.
-- Apperciate their effort for the final project!
+## 遊戲畫面
+- 遊戲選單
+	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_1.png)
+- 遊戲介紹
+	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_2.png)
+- 遊戲遊玩畫面
+	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_3.png)
+- 遊戲結束畫面
+	- [image](https://github.com/steve50207/I2P1_Final_project_I-wanna-handout-the-final-project/blob/main/png/game_scene_4.png)
 
-## Reference Resource
+## 感謝名單
+- 此項期末專題由Grace、YenTing、Steve三人協力完成，感謝他們的努力!
 
+## 參考資料
 - Allegro download: [https ://github.com/liballeg/allegro5/releases](https://github.com/liballeg/allegro5/releases)
-
 - Allegro install(mac): https://hackmd.io/@kerwintsai/SkRTk6kCS
 - Allegro install(Windows):  https://github.com/yuan7122/I2P1_Final_project/blob/master/tutorial/Allegro_install.pdf
 - Allegro documentation: https://liballeg.org/a5docs/trunk/

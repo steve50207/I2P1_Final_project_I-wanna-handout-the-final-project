@@ -2,7 +2,7 @@
 
 ## 遊戲名稱: I wanna handout the final project!
 
-## 如何下載遊戲
+## 遊玩遊戲
 - 下載 'I wanna handout the final project!.zip' 然後解壓縮。
 - 執行 'I wanna handout the final project!.exe' 即可進行遊玩。
 
